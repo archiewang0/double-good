@@ -1,0 +1,37 @@
+// @import '../../img/down_arrow-22.svg';
+
+.selectBar{
+    padding-right: 20px;
+    position: relative;
+    background-color: red;
+    display: flex;
+
+    >div{
+        width: 100%;
+        padding: 5px;
+        span{
+            display: block;
+            width: 30px;
+            height: 30px;
+            // background-color: white;
+            top: 0;
+            // background-size: contain;
+            // background: url() no-repeat center center;
+            position: absolute;
+            right: 0;
+        }
+
+    }
+    .list{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        transform: translate(0,100%);
+        background-color: white;
+        border: 1px solid black;
+        border-top: unset;
+        box-shadow: 1px 1px 5px 3px rgba($color: #000000, $alpha: .3);
+
+    }
+
+}

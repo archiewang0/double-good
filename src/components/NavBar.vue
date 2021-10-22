@@ -1,15 +1,58 @@
 <template>
-    <nav>
-        <img src="../assets/logo/double-good-top-logo.svg" alt="">
+    <nav :class="stauts">
+        <div>
+            <a class="menuBtn" href="javascript:;">
+                <div></div>
+                <div></div>
+                <div></div>
+            </a>
+
+            <a class="logo" href="javascript:;">
+                <div>
+                    <img src="../assets/img/horizontal-logo-11.svg" alt="">
+                </div>
+            </a>
+        </div>
+
+        <div>
+
+            <search-bar></search-bar>
+
+            <a class="cart" href="javascript:;">
+                <div>
+                    <img src="../assets/img/cart-icon.svg" alt="">
+                </div>
+            </a>
+            <a class="member" href="javascript:;">
+                <div>
+                    <img src="../assets/img/member-icon.svg" alt="">
+                </div>
+            </a>
+
+        </div>
     </nav>
 </template>
 
-<style lang="scss" scoped>
-nav{
-    height: 55px;
-    background-color: white;
-    box-shadow: 1px 1px 10px 3px rgb(0 0 0 / 5%);
-    position: fixed;
-    width: 100%;
+
+<script>
+import SearchBar from './SearchBar';
+import {ref} from 'vue';
+
+export default {
+    components:{
+        SearchBar,
+    },
+    setup() {
+        const stauts = ref('active')
+
+
+        return {
+            stauts,
+        }
+    },
 }
+</script>
+
+<style lang="scss" scoped>
+    @import '../assets/scss/components/navBar';
 </style>
