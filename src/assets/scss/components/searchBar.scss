@@ -1,3 +1,38 @@
 .search{
-    background-color: red;
+    // background-color: red;
+    display: flex;
+    flex-wrap: nowrap;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    margin: unset;
+    padding: unset;
+    margin-right: 20px;
+    position: relative;
+
+    padding: 5px 10px;
+    input{
+        border: unset;
+        outline: unset;
+        letter-spacing: .5px;
+        font-size: 16px;
+        vertical-align: center;
+    }
+    input[type="button"]{
+        width: 15px;
+        height: 15px;
+        background: url(~@/assets/img/search-icon.svg) no-repeat center center;
+        // transform: translate(0,10%);
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    input[type="text"]{
+        width: 30vw;
+    }
+
+    .recommedBar{
+        position: absolute;
+        bottom: 0;
+    }
 }

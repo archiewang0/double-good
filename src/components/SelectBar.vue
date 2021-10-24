@@ -1,29 +1,36 @@
 <template>
     <div class="selectBar">
-        <div>
-            <p>main</p>
-            <span :style="downArrow"></span>
-        </div>
-        <div class="list">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
+        <a class="main" @click="toggleSelect" href="javascript:;">
+            <p>{{currentVal}}</p>
+        </a>
+        <div class="list" v-if="open">
+            <a href="javascript:;" @click="changeVal">PRODOUCT</a>
+            <a href="javascript:;" @click="changeVal">DESIGNER</a>
         </div>
     </div>
 </template>
 
 <script>
-import {computed} from 'vue';
+import {ref} from 'vue';
 export default {
     setup(){
-        const downArrow = computed(()=>{
-            return {
-                'background': `url('${require('../assets/img/down_arrow-22.svg')}') no-repeat center center`
-            }
-        });
+        const open = ref(false)
+        const currentVal = ref('PRODOUCT')
 
-        return {
-            downArrow,
+        const toggleSelect = ()=>{
+            open.value = !open.value
+        }
+
+        const changeVal = (e) => {
+            currentVal.value = e.target.innerText
+            open.value = false
+        }
+
+        return{
+            toggleSelect,
+            changeVal,
+            open,
+            currentVal,
         }
     }
 }

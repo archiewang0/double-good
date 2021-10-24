@@ -3,6 +3,9 @@
         <input type="button">
         <input type="text" placeholder="SEARCH">
         <select-bar></select-bar>
+        <div class="recommedBar">
+
+        </div>
     </div>
 </template>
 

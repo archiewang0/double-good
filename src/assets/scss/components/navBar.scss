@@ -1,10 +1,11 @@
 nav{
-    height: 55px;
+    // height: 55px;
     background-color: white;
     box-shadow: 1px 1px 10px 3px rgb(0 0 0 / 5%);
     position: fixed;
     width: 100%;
     padding: 10px 20px;
+    align-items: center;
 
     display: flex;
     justify-content: space-between;
@@ -36,6 +37,7 @@ nav{
                 top: calc(70% - .5px);
             }
         }
+
         .logo{
             height: 100%;
             position: relative;
@@ -54,11 +56,156 @@ nav{
         }
 
         .cart{
-            width: 30px;
+            width: 25px;
             margin-right: 20px;
         }
         .member{
-            width: 22px;
+            width: 18px;
+        }
+    }
+
+    .aside{
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background: rgba($color: black, $alpha: .5);
+        top: 0;
+        left: 0;
+        z-index: 5;
+        visibility: hidden;
+        opacity: 0;
+        transition: all ease .3s;
+        >div{
+            width: 50%;
+            height: 100%;
+            overflow: auto;
+            background: white;
+            display: flex;
+            flex-wrap: wrap;
+            transform: translate(-100%,0);
+            transition: all ease .3s;
+
+            .top{
+                border-bottom: 1px solid black;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding:  10px 20px;
+                width: 100%;
+
+                .logo{
+                    width: 300px;
+                }
+                .closeBtn{
+                    width: 25px;
+                    height: 25px;
+                    position: relative;
+
+                    &::after,&::before{
+                        content: "";
+                        display: block;
+                        width: 100%;
+                        height: 2px;
+                        background: black;
+                        top: calc(50% - .5px);
+                        position: absolute;
+                        left: calc(50% - 15px);
+                    }
+
+                    &::after{
+                        transform: rotate(45deg);
+                    }
+
+                    &::before{
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+
+            .links{
+                min-height: calc(100% - 50px);
+                width: 100%;
+                overflow: auto;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+
+                >a{
+                    display: block;
+                    width: 100%;
+                    height: calc(100% / 5);
+                    font-size: 78px;
+                    font-weight: 900;
+                    text-align: left;
+                    padding: 20px;
+                    color: #0b2659;
+                    display: flex;
+                    align-items: center;
+                    border-bottom: 1px solid black;
+                    transition: all ease .3s;
+                    position: relative;
+                    z-index: 0;
+                    >div{
+                        position: absolute;
+                        height: 2px;
+                        z-index: -1;
+                        background: white;
+                        top: calc(50% - 1px);
+                        border-radius: 10px;
+                        width: 0;
+                        transition: all ease .3s;
+
+                        &::after,&::before{
+                            content: "";
+                            display: block;
+                            width: 0;
+                            height: 2px;
+                            position: absolute;
+                            right: 0;
+                            background-color: white;
+                            transform-origin: right;
+                            border-radius: 50px;
+                        }
+
+                        &::after{
+                            transform: rotate(45deg);
+                        }
+
+                        &::before{
+                            transform: rotate(-45deg);
+                        }
+                    }
+
+                    &:hover{
+                        background: #0b2659;
+                        color: white;
+                        >div{
+                            width: calc(100% - 40px);
+                            &::after,&::before{
+                                width: 50px;
+                                transition: width ease .3s;
+                                transition-delay: .3s;
+                            }
+                        }
+                    }
+                }
+                >:last-child{
+                    border-bottom: unset
+
+                }
+            }
+        }
+    }
+
+    // nav.active
+    &.active{
+        .aside{
+            visibility: visible;
+            opacity: 1;
+            >div{
+                transform: translate(0,0);
+
+            }
         }
     }
 

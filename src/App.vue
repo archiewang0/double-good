@@ -2,6 +2,9 @@
 	<div class="wrap" :class="status">
 		<nav-bar></nav-bar>
 
+		<div class="body">
+			<router-view/>
+		</div>
 
 	</div>
 </template>
@@ -40,6 +43,9 @@ export default {
 	min-height: 100vh;
 	.wrap{
 		overflow: auto;
+	}
+	.body{
+		padding-top: 60px;
 	}
 }
 </style>
