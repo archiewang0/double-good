@@ -3,7 +3,15 @@
 		<nav-bar></nav-bar>
 
 		<div class="body">
-			<router-view/>
+			<router-view v-slot="{ Component }">
+				<transition
+					@enter="enter"
+					@afterEnter="afterEnter">
+					<component :is="Component" />
+				</transition>
+			</router-view>
+
+
 		</div>
 
 	</div>
@@ -11,7 +19,9 @@
 
 <script>
 import {ref} from 'vue';
-import NavBar from './components/NavBar.vue'
+import NavBar from './components/nav/NavBar'
+
+import gsap from 'gsap';
 
 export default {
 	name: 'App',
@@ -22,8 +32,24 @@ export default {
 	setup(){
 		const status = ref('active')
 
+		const enter = (el,done)=>{
+			gsap.from(el,{
+				duration: .5,
+				x: '20px',
+				opacity: 0,
+				// ease: 'bounce.out',
+				onComplete: done
+			})
+		}
+
+		const afterEnter = ()=>{
+			console.log('after enter')
+		}
+
 		return {
 			status,
+			enter,
+			afterEnter,
 		};
 	}
 }
@@ -42,7 +68,8 @@ export default {
 	background-color: gray;
 	min-height: 100vh;
 	.wrap{
-		overflow: auto;
+		overflow-x: hidden;
+		height: 100vh;
 	}
 	.body{
 		padding-top: 60px;

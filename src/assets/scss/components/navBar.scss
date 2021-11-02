@@ -3,6 +3,7 @@ nav{
     background-color: white;
     box-shadow: 1px 1px 10px 3px rgb(0 0 0 / 5%);
     position: fixed;
+    z-index: 500;
     width: 100%;
     padding: 10px 20px;
     align-items: center;
@@ -64,6 +65,7 @@ nav{
         }
     }
 
+    // 共用
     .aside{
         position: absolute;
         width: 100%;
@@ -75,6 +77,8 @@ nav{
         visibility: hidden;
         opacity: 0;
         transition: all ease .3s;
+        display: flex;
+        justify-content: flex-start;
         >div{
             width: 50%;
             height: 100%;
@@ -84,7 +88,11 @@ nav{
             flex-wrap: wrap;
             transform: translate(-100%,0);
             transition: all ease .3s;
+        }
+    }
 
+    .forMenu{
+        >div{
             .top{
                 border-bottom: 1px solid black;
                 display: flex;
@@ -188,6 +196,14 @@ nav{
                             }
                         }
                     }
+
+                    &.active{
+                        background: #0b2659;
+                        color: white;
+                        >div{
+                            display: none;
+                        }
+                    }
                 }
                 >:last-child{
                     border-bottom: unset
@@ -197,9 +213,253 @@ nav{
         }
     }
 
-    // nav.active
+    .forCart{
+        justify-content: flex-end;
+        >div{
+            display: flex;
+            align-items: flex-start;
+            align-content: space-between;
+            transform: translate(100%,0);
+
+            >*{
+                width: 100%;
+            }
+            .top{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid black;
+                flex-grow: 1;
+                >p{
+                    padding-left: 20px;
+                    font-size: 60px;
+                    font-weight: 900;
+                    line-height: .69;
+                    position: relative;
+                    color: black;
+                    >span{
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        font-weight: 100;
+                        transform: translate(calc(100% + 10px),0);
+                        font-size: 16px;
+                        opacity: .8;
+                    }
+                }
+
+                .closeBtn{
+                    display: block;
+                    position: relative;
+                    width: 135px;
+                    height: 135px;
+                    border-left: 1px solid black;
+                    &::after,&::before{
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        width: 80%;
+                        height: 1px;
+                        top: calc(50% - .5px);
+                        left: 10%;
+                        background-color: black;
+                    }
+
+                    &::after{
+                        transform: rotate(45deg);
+                    }
+
+                    &::before{
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+
+            .list{
+                flex-grow: 1000;
+                overflow: auto;
+
+            }
+
+            .payBtn{
+                flex-grow: 1;
+                .subtotal{
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0 20px;
+                    padding-top: 20px;
+                    margin-bottom: 10px;
+                    >p{
+                        font-size: 28px;
+                        font-weight: 900;
+                        color: black;
+
+                    }
+                }
+
+                .btn{
+                    border-top: 1px solid black;
+                    padding: 20px;
+                    >a{
+                        display: block;
+                        width: 100%;
+                        font-size: 50px;
+                        font-weight: 900;
+                        background-color: #0b2659;
+                        color: white;
+                        padding: 15px;
+                        line-height: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    .forMember{
+        justify-content: flex-end;
+        >div{
+            display: flex;
+            align-items: flex-start;
+            // align-content: space-between;
+            transform: translate(100%,0);
+            
+            >*{
+                width: 100%;
+            }
+            .top{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid black;
+                flex-grow: 1;
+                >p{
+                    padding-left: 20px;
+                    font-size: 60px;
+                    font-weight: 900;
+                    line-height: .69;
+                    position: relative;
+                    color: black;
+                    >span{
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        font-weight: 100;
+                        transform: translate(calc(100% + 10px),0);
+                        font-size: 16px;
+                        opacity: .8;
+                    }
+                }
+
+                .closeBtn{
+                    display: block;
+                    position: relative;
+                    width: 135px;
+                    height: 135px;
+                    border-left: 1px solid black;
+                    &::after,&::before{
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        width: 80%;
+                        height: 1px;
+                        top: calc(50% - .5px);
+                        left: 10%;
+                        background-color: black;
+                    }
+
+                    &::after{
+                        transform: rotate(45deg);
+                    }
+
+                    &::before{
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+
+            .inputBlock{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: nowrap;
+                position: relative;
+                top: -50px;
+
+                >div{
+                    width: 50%;
+
+                    label{
+                        display: block;
+                        position: relative;
+                        margin:  20px 0;
+
+                        >span{
+                            position: absolute;
+                            left: 0;
+                            bottom: 10px;
+                            font-size: 14px;
+                            color: gray;
+                            font-size: 18px;
+
+                        }
+                        >input{
+                            width: 100%;
+                            outline: unset;
+                            border: unset;
+                            border-bottom: 1px solid gray;
+                            height: 50px;
+                            font-size: 18px;
+
+                        }
+                        >a{
+                            display: block;
+                            position: absolute;
+                            right: 0;
+                            bottom: 8px;
+                            width: 25px;
+                            height: 15px;
+                            border-radius: 100%;
+                            border: 2px solid black;
+                            &::after{
+                                content: "";
+                                display: block;
+                                width: 50%;
+                                height: 100%;
+                                background-color: black;
+                                position: absolute;
+                                left: calc(50% - 7.5px);
+                                top: calc(50% - 7.5px);
+                                border-radius: 100%;
+                            }
+                        }
+                    }
+
+                    .loginBtn{
+                        width: 100%;
+                        margin-top: 70px;
+                        >a{
+                            display: block;
+                            font-size: 30px;
+                            font-weight: 900;
+                            padding: 25px;
+                            text-align: center;
+                            color: white;
+                            background-color: #00256a;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    // active 區域
     &.active{
-        .aside{
+        .forMenu{
             visibility: visible;
             opacity: 1;
             >div{
@@ -208,6 +468,26 @@ nav{
             }
         }
     }
+    &.cartActive{
+        .forCart{
+            visibility: visible;
+            opacity: 1;
+            >div{
+                transform: translate(0,0);
+            }
+        }
+    }
+    &.memberActive{
+        .forMember{
+            visibility: visible;
+            opacity: 1;
+            >div{
+                transform: translate(0,0);
+            }
+        }
+    }
+
+
 
     @media screen and (max-width:1500px) {
         >div{

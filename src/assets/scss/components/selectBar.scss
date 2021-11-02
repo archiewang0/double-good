@@ -1,6 +1,5 @@
-// @import '../../img/down_arrow-22.svg';
 
-@import '../common/reset';
+// @import '../common/reset';
 
 .selectBar{
     position: relative;
@@ -11,7 +10,6 @@
         padding: 8px;
         position: relative;
         font-size: 16px;
-
     }
 
     .main{
@@ -45,12 +43,19 @@
         background-color: white;
         border: 1px solid black;
         border-top: unset;
+        padding: unset;
+        padding-top: 10px;
         box-shadow: 1px 6px 9px 1px rgb(0 0 0 / 4%);
         // display: none;
         >*{
             display: block;
-            padding: 2px;
             text-align: left;
+            padding:8px ;
+
+            &:hover{
+                background-color: #0b2659;
+                color: white;
+            }
         }
     }
 }

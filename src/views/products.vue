@@ -4,3 +4,16 @@
     </h1>
 
 </template>
+
+<script>
+export default {
+    setup() {
+        
+    },
+    beforeRouteEnter(to,from,next){
+        console.log('component beforeRouteEnter')
+        console.log(to,from)
+        next()
+    },
+}
+</script>
