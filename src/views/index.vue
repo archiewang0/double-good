@@ -73,7 +73,7 @@ export default {
         const passSwiperVal = ref({
             createSwiperFun: ()=>{console.log('建立swiper')},
             // 如果需要帶入 function 不需要則帶入null
-            swiperChangeFun: ()=>{console.log('change')},
+            swiperChangeFun: (e)=>{console.log(e)},
             // 如果需要帶入 function 不需要則帶入null
 
 
@@ -85,8 +85,13 @@ export default {
             // 傳入boolean 不須要帶入null
             autoplay: {delay:2000,disableOnInteraction: false},
             // 傳入object {delay:500,disableOnInteraction: false} 不須要帶入null
-            pagination: true,
-            // 傳入boolean 不須要帶入null
+            pagination: {
+                clickable: true, 
+                renderBullet: (index, className )=>{
+                    return `<span class="${className}">${index + 1}</span>`
+                },
+            },
+            // 傳入 object {clickable: true, renderBullet: function(){...}}  不須要帶入null 
             loop: false,
             // 傳入boolean 不須要帶入null
             FreeMode: false,
@@ -136,7 +141,7 @@ export default {
 .swiperContainer{
     .swiper{
         overflow: hidden;
-        height: 90vh;
+        height: 85vh;
 
         .swiper-wrapper{
             height: 100%;
@@ -153,6 +158,39 @@ export default {
                         object-position: center;
                     }
                 }
+            }
+        }
+
+        .swiper-pagination{
+            flex-direction: column;
+            display: flex;
+            width: unset;
+            top: 50%;
+            right: 20px;
+            left: unset;
+            bottom: unset;
+            transform: translate(0,-50%);
+            .swiper-pagination-bullet{
+                font-size: 120px;
+                line-height: 150px;
+                font-weight: 900;
+                width: 150px;
+                height: 150px;
+                -webkit-text-stroke: 1px white;
+                background-color: transparent;
+                border: 1px solid white;
+                opacity: 1;
+                color: transparent;
+                transition: color ease .3s;
+                margin: 10px;
+
+                &:hover{
+                    color: white;
+
+                }
+            }
+            .swiper-pagination-bullet-active{
+                color: white;
             }
         }
 

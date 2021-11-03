@@ -46,9 +46,10 @@ export default {
             fun? fun() : null
             
         };
-        const slideChange = () => {
+        const slideChange = (e) => {
             let fun = prop.values.swiperChangeFun
-            fun?  fun(): null
+            // fun?  fun(): null
+            fun(e)
         };
         
 
@@ -79,7 +80,7 @@ export default {
 
         const setPagin = computed(()=>{
             let Pagin = prop.values.pagination
-            return Pagin? {clickable: true}: false
+            return Pagin? Pagin: false
         })
 
         const setLoop = computed(()=>{
