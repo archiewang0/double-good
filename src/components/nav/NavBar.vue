@@ -34,8 +34,6 @@
             </a>
         </div>
 
-
-
         <!-- for menu -->
         <div class="aside forMenu">
             <div>
@@ -48,11 +46,13 @@
                 </div>
 
                 <div class="links" @click="closeMenu">
-                    <router-link to="/products" :class="setActive('PRODUCTS')"><div></div>PRODUCTS</router-link>
-                    <router-link to="/designer" :class="setActive('DESIGNER')"><div></div>DESIGNER</router-link>
-                    <router-link to="/about" :class="setActive('ABOUT')"><div></div>ABOUT</router-link>
-                    <router-link to="/contact" :class="setActive('CONTACT')"><div></div>CONTACT</router-link>
-                    <router-link to="/member" :class="setActive('MEMBER')"><div></div>MEMBER</router-link>
+
+                    <router-link to="/products" :class="setActive.prod"><div></div>PRODUCTS</router-link>
+                    <router-link to="/designer" :class="setActive.designer"><div></div>DESIGNER</router-link>
+                    <router-link to="/about" :class="setActive.about"><div></div>ABOUT</router-link>
+                    <router-link to="/contact" :class="setActive.contact"><div></div>CONTACT</router-link>
+                    <router-link to="/member" :class="setActive.member"><div></div>MEMBER</router-link>
+
                 </div>
 
             </div>
@@ -60,92 +60,79 @@
         </div>
 
         <!-- for cart--> 
-        <!-- <div class="aside forCart">
-            <div>
-                <div class="top">
-                    <p>
-                        YOUR CART <span>(0)</span>
-                    </p>
-                    
-                    <a class="closeBtn" href="javascript:;" @click="closeMenu"></a>
-                </div>
-
-                <div class="list">
-                    <div class="cartItem">
-
-                    </div>
-                </div>
-                <div class="payBtn">
-                    <div class="subtotal">
-                        <p>SUBTOTAL</p>
-                        <p>200 NT$</p>
-                    </div>
-                    <div class="btn">
-                        <a href="javascript:;">
-                            CONTINUE TO PAYMENT
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
         <cart-aside @close="closeMenu"></cart-aside>
 
         <!-- for member -->
         <member-aside @close="closeMenu"></member-aside>
+
+
+        <nav-visual-info></nav-visual-info>
+
     </nav>
 </template>
 
 
 <script>
 import { useRoute } from 'vue-router';
-import {ref} from 'vue';
+import {watch,computed  } from 'vue';
+
 
 import SearchBar from './SearchBar';
 import MemberAside  from './MemberAside';
 import CartAside from './CartAside';
+import NavVisualInfo from './NavVisualInfo'
+
+
+
+import navMixins from '../../hooks/navMixins.js';
+
 
 
 export default {
     components:{
         SearchBar,
         MemberAside,
-        CartAside
+        CartAside,
+        NavVisualInfo
     },
     setup() {
-        const route = useRoute();
-        const status = ref('');
-        const currentLink = ref('')
+        const {status, closeMenu,openNav} = navMixins()
 
-        const setActive = (val) =>{
-            return {
-                'active': currentLink.value === val
+        const route = useRoute()
+
+        watch(route,function(newVal){
+            console.log(newVal.path)
+        })
+
+
+        const setActive = computed(()=>{
+            const curLink = route.path.replace('/',"").toUpperCase()
+
+            return{
+                prod: {'active': curLink === 'PRODUCTS'},
+                about: {'active': curLink === 'ABOUT'},
+                contact: {'active': curLink === 'CONTACT'},
+                designer: {'active': curLink === 'DESIGNER'},
+                member: {'active': curLink === 'MEMBER'},
             }
-        }
-        const closeMenu = ()=>{
-            status.value = "";
-            let path = route.path
-            path = path.replace('/',"").toUpperCase()
-            currentLink.value = path
-        }
-        const openNav = (setVal)=>{
-            status.value = setVal
-        }
+        })
+
+
+
 
 
         return {
-
             status,
 
             setActive,
             closeMenu,
             openNav,
+
         }
     },
-
 }
 </script>
 
 <style lang="scss" scoped>
-    @import '../../assets/scss/components/navBar';
+@import '../../assets/scss/components/navBar';
 </style>

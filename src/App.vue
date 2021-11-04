@@ -18,9 +18,15 @@
 </template>
 
 <script>
+// import { useRoute } from 'vue-router';
 import {ref} from 'vue';
 import NavBar from './components/nav/NavBar'
 
+
+// hooks
+// import navMixins from './hooks/navMixins.js';
+
+//套件
 import gsap from 'gsap';
 
 export default {
@@ -40,10 +46,12 @@ export default {
 				// ease: 'bounce.out',
 				onComplete: done
 			})
+
+			console.log('進入別的component')
+			// closeMenu()
 		}
 
 		const afterEnter = ()=>{
-			console.log('after enter')
 		}
 
 		return {

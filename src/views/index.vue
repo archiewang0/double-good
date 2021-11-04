@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="index">
         
         <custom-swiper
             :values="passSwiperVal"
@@ -53,6 +53,7 @@
 <script>
 
 import {ref} from 'vue';
+import {onBeforeRouteLeave} from  'vue-router';
 
 
 // import img12 from '../assets/img/banner-one.jpeg';
@@ -60,10 +61,7 @@ import {ref} from 'vue';
 
 export default {
     setup() {
-        // console.log(img12)
-
-        // console.log(img12)
-
+        
         const items = ref([
             { title: 'First', description: 'The first item.' },
             { title: 'three', description: 'The three item.'},
@@ -73,7 +71,7 @@ export default {
         const passSwiperVal = ref({
             createSwiperFun: ()=>{console.log('建立swiper')},
             // 如果需要帶入 function 不需要則帶入null
-            swiperChangeFun: (e)=>{console.log(e)},
+            swiperChangeFun: ()=>{console.log('swiperChange')},
             // 如果需要帶入 function 不需要則帶入null
 
 
@@ -124,12 +122,14 @@ export default {
                 content: 'sapiente aspernatur qui consequatur maxime ad tempora laudantium blanditiis eligendi. Rem consequatur tenetur quos cupiditate eius provident voluptate quas atque? Doloribus dolorem ex, fuga porro nisi sit?'},
         ])
 
-        // const fdsffdimg = require('../assets/img/banner-two5.jpg')
+
+        onBeforeRouteLeave(()=>{
+            passSwiperVal.value.autoplay = null
+        })
 
         return {
             items,
             slides,
-            // fdsffdimg,
 
             passSwiperVal,
         }
@@ -195,6 +195,10 @@ export default {
         }
 
     }
+}
+
+.index{
+    height: 2000px;
 }
 
 
