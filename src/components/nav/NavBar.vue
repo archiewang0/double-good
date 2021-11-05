@@ -2,37 +2,40 @@
     <!-- status -->
     <nav :class="status">
     <!-- <nav class="status"> -->
-        <div>
-            <a class="menuBtn" @click="openNav('active')" href="javascript:;" >
-                <div></div>
-                <div></div>
-                <div></div>
-            </a>
 
-            <router-link to="/" class="logo">
-                <div>
-                    <!-- <img src="../assets/img/horizontal-logo-11.svg" alt=""> -->
-                    <img src="../../assets/img/horizontal-logo-11.svg" alt="">
-                </div>
-            </router-link>
+        <div class="navWrap">
+            <div>
+                <a class="menuBtn" @click="openNav('active')" href="javascript:;" >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </a>
+
+                <router-link to="/" class="logo">
+                    <div>
+                        <img src="../../assets/img/horizontal-logo-11.svg" alt="">
+                    </div>
+                </router-link>
+            </div>
+
+
+            <div>
+                <search-bar></search-bar>
+
+                <a class="cart" href="javascript:;" @click="openNav('cartActive')">
+                    <div>
+                        <img src="../../assets/img/cart-icon.svg" alt="">
+                    </div>
+                </a>
+
+                <a class="member" href="javascript:;" @click="openNav('memberActive')">
+                    <div>
+                        <img src="../../assets/img/member-icon.svg" alt="">
+                    </div>
+                </a>
+            </div>
         </div>
 
-
-        <div>
-            <search-bar></search-bar>
-
-            <a class="cart" href="javascript:;" @click="openNav('cartActive')">
-                <div>
-                    <img src="../../assets/img/cart-icon.svg" alt="">
-                </div>
-            </a>
-
-            <a class="member" href="javascript:;" @click="openNav('memberActive')">
-                <div>
-                    <img src="../../assets/img/member-icon.svg" alt="">
-                </div>
-            </a>
-        </div>
 
         <!-- for menu -->
         <div class="aside forMenu">
@@ -74,7 +77,7 @@
 
 <script>
 import { useRoute } from 'vue-router';
-import {watch,computed  } from 'vue';
+import {computed  } from 'vue';
 
 
 import SearchBar from './SearchBar';
@@ -99,10 +102,6 @@ export default {
         const {status, closeMenu,openNav} = navMixins()
 
         const route = useRoute()
-
-        watch(route,function(newVal){
-            console.log(newVal.path)
-        })
 
 
         const setActive = computed(()=>{

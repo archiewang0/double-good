@@ -1,9 +1,12 @@
 <template>
-     <div class="navVisualInfo">
+     <div class="navVisualInfo" :class="infoIndexShow" >
             <div class="mainContent">
                 <div class="logo">
-                    <img src="../../assets/img/double-good-top-logo.svg" alt="">
+                    <router-link to="/" >
+                        <img src="../../assets/img/double-good-top-logo.svg" alt="">
+                    </router-link>
                 </div>
+
 
                 <div class="aboutInfo">
                     <div class="subtitle">
@@ -21,21 +24,58 @@
                             <router-link to="/contact" class="contact"> CONTACT ></router-link>
                         </div>
   
+                        <div class="icons">
+                            <div>
+                                <a href="javascript:;"><img src="../../assets/img/fb.svg" alt=""></a>
+                            </div>
+
+                            <div>
+                                <a href="javascript:;"><img src="../../assets/img/ig.svg" alt=""></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div>
+                <img src="../../assets/img/slogan.svg" alt="">
             </div>
         </div>
 </template>
 
 <script>
+import {useRoute} from 'vue-router';
+import {computed} from 'vue';
+import {useStore} from 'vuex';
+
 import navMixins from '../../hooks/navMixins.js';
 
 export default {
     setup(){
         const {closeMenu} = navMixins();
+        const store = useStore()
+
+        // const checkSroll = computed(()=>{
+        //     return store.getters['indexScrollHidden']
+        // })
+
+
+        // computed 無法綁定兩次 
+        // 如果希望他直接反應 就必須第一個computed 
+        const infoIndexShow = computed(()=>{
+            let path = useRoute().path
+            console.log('滑動是否觸發')
+            return {indexShow:  path == '/' && !store.getters['nav/indexScrollHidden'] }
+        })
+
+
+
 
         return{
             closeMenu,
+
+            // checkSroll,
+            infoIndexShow,
         }
     }
 

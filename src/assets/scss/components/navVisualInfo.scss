@@ -5,8 +5,13 @@
     bottom: 0;
     left: 0;
     height: unset;
-    transform: translate(0,100%);
+    transform: translate(0,0%);
     padding-top: 55px;
+    z-index: -1;
+    display: flex;
+    flex-wrap: wrap;
+
+    transition: transform ease .3s;
 
     .mainContent{
         display: flex;
@@ -63,11 +68,42 @@
 
                     .more{
                         border-bottom: 1px solid black;
+
+                    }
+                }
+
+                .icons{ 
+                    transform: translate(calc(100% + 50px),0);
+                    position: absolute;
+                    right: 0;
+
+                    >div{
+                        display: inline-block;
+                        margin: 10px 20px;
+                        >a{
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            opacity: .5;
+                            img{
+                                height: 100%;
+                            }
+                        }
                     }
                 }
             }
         }
     }
 
+    >div{
+        width: 100%;
+        img{
+            width: 100%;
+        }
+    }
 
+    &.indexShow{
+        transform: translate(0,99%);
+
+    }
 }

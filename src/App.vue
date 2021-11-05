@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap" :class="status">
+	<div class="wrap" :class="status" @scroll.prevent="wrapSrollevent">
 		<nav-bar></nav-bar>
 
 		<div class="body">
@@ -10,15 +10,15 @@
 					<component :is="Component" />
 				</transition>
 			</router-view>
-
-
 		</div>
 
 	</div>
 </template>
 
 <script>
-// import { useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
+import {useStore} from 'vuex';
+
 import {ref} from 'vue';
 import NavBar from './components/nav/NavBar'
 
@@ -37,6 +37,8 @@ export default {
 
 	setup(){
 		const status = ref('active')
+		const route = useRoute();
+		const store = useStore();
 
 		const enter = (el,done)=>{
 			gsap.from(el,{
@@ -46,18 +48,36 @@ export default {
 				// ease: 'bounce.out',
 				onComplete: done
 			})
-
-			console.log('進入別的component')
-			// closeMenu()
 		}
+
+		// 將infoIndex 的value 帶入讓這裡事件發生改變數據, 在navVisual 使用computed 來偵測是否變化再帶入值
+		// const {infoIndexStatus} = navMixins();
 
 		const afterEnter = ()=>{
 		}
+
+		// 滾動事件
+		const wrapSrollevent = (e) =>{
+			if(route.path === '/'){
+				// console.log(e.target.scrollTop)
+				const scrollY = e.target.scrollTop
+
+				if(scrollY === 0 ){
+					store.commit('nav/toggleIndexScrollHiddenStatus',false)
+					console.log('傳送false')
+				} else{
+					store.commit('nav/toggleIndexScrollHiddenStatus',true)
+					console.log('傳送true')
+				}
+			}
+		}
+
 
 		return {
 			status,
 			enter,
 			afterEnter,
+			wrapSrollevent,
 		};
 	}
 }

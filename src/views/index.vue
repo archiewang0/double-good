@@ -1,9 +1,10 @@
 <template>
-    <div class="index">
+    <div>
         
         <custom-swiper
             :values="passSwiperVal"
             :slides="slides"
+            class="banner"
             >
             
             <template #default="{slide}">
@@ -15,7 +16,26 @@
             </template>
         </custom-swiper>
 
-        <!-- <img src="../assets/img/banner-two5.jpg" alt=""> -->
+        <div class="bannerContent">
+            <div>
+                <div class="title">
+                    <p class="subTitle">最新商品</p>
+                    <p>NEWEST!!</p>
+                </div>
+            
+                <div class="content">
+                    <div>
+                        <p class="main">Discover popular proudct in dooble good....</p>
+                        <p>XXOO 獨立品牌,來自於 Designer Alex Bagshawe 親自操刀,運用幾何線條以及對比強烈的色彩、大膽的配色、已成為 Alex Bagshawe 獨有的視覺風格、使用義大利進口皮革 , 精緻的車工縫線、手指的碰觸都可以感受到細部的質感紋理、在台灣時間2021/1/1開始在...</p>
+                    </div>
+                </div>
+
+                <a href="javascript:;" class="scrollDown">
+                    <img src="../assets/img/scroll.svg" alt="">
+                </a>
+            </div>
+   
+        </div>
 
         <masonry-wall 
             :items="items" 
@@ -32,22 +52,7 @@
             </template>
         </masonry-wall>
 
-        <test-ui>
-            <template #default="{passVal}">
-                <h1 class="fontStyle">一些內容</h1>
-                <p>{{passVal}}</p>  
-
-            </template>
-
-            <template #other="slot">
-                <div class="ohter2">哈哈哈哈</div>
-                <p>{{slot.otherVal}}</p>
-            </template>
-        </test-ui>
-
-
     </div>
-
 </template>
 
 <script>
@@ -101,14 +106,14 @@ export default {
 
         const slides = ref([
             {
-                img: require('../assets/img/banner-two5.jpg'),
+                img: require('../assets/img/banner-one.jpg'),
                 // img: getImgUrl('banner-one.jpeg'),
                 subtitle: '新品上市',
                 tilte: 'NEWEST!!',
                 scondTitle: 'XXOO Brand from Alex Bagshawe start selling...',
                 content: 'XXOO 獨立品牌,來自於 Designer Alex Bagshawe 親自操刀,運用幾何線條以及對比強烈的色彩、大膽的配色、已成為 Alex Bagshawe 獨有的視覺風格、使用義大利進口皮革 , 精緻的車工縫線、手指的碰觸都可以感受到細部的質感紋理、在台灣時間2021/1/1開始在...'},
             {
-                img: require('../assets/img/banner-one.jpg'),
+                img: require('../assets/img/banner-two5.jpg'),
                 // img: getImgUrl('banner-one.jpeg'),
                 subtitle: '聖誕優惠',
                 tilte: 'XMAS GIFTS',
@@ -138,68 +143,8 @@ export default {
 </script>
 
 <style lang="scss">
-.swiperContainer{
-    .swiper{
-        overflow: hidden;
-        height: 85vh;
+@import '../assets/scss/view/index';
 
-        .swiper-wrapper{
-            height: 100%;
-            .swiper-slide{
-                height: 100%;
-                background-color: green;
-                figure{
-                    width: 100%;
-                    height: 100%;
-                    img{
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        object-position: center;
-                    }
-                }
-            }
-        }
-
-        .swiper-pagination{
-            flex-direction: column;
-            display: flex;
-            width: unset;
-            top: 50%;
-            right: 20px;
-            left: unset;
-            bottom: unset;
-            transform: translate(0,-50%);
-            .swiper-pagination-bullet{
-                font-size: 120px;
-                line-height: 150px;
-                font-weight: 900;
-                width: 150px;
-                height: 150px;
-                -webkit-text-stroke: 1px white;
-                background-color: transparent;
-                border: 1px solid white;
-                opacity: 1;
-                color: transparent;
-                transition: color ease .3s;
-                margin: 10px;
-
-                &:hover{
-                    color: white;
-
-                }
-            }
-            .swiper-pagination-bullet-active{
-                color: white;
-            }
-        }
-
-    }
-}
-
-.index{
-    height: 2000px;
-}
 
 
 </style>

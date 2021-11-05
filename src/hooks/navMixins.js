@@ -1,33 +1,26 @@
-import {ref} from 'vue';
-import { useRoute } from 'vue-router';
+import {ref,computed} from 'vue';
+// import { useRoute } from 'vue-router';
 
 
 export default function navCommonFun(){
-    const route = useRoute();
-    // 用來關掉 menu
+
+ 
     const status = ref('');
+    
+    //false 代表滾動了 true 代表在最上面 
+    const infoIndexStatus = ref(false)
 
-    // 只要變更currentLink 就會自動 改變menu的狀態
-    const currentLink = ref('')
+    const infoIndexStatusComputed = computed(()=>{
+        let val = infoIndexStatus.value
+        console.log('test')
+        return val
+    })
 
-    // 只能使用 router-link 的value 
-    const setActive = (val) =>{
-        return {
-            'active': currentLink.value === val
-        }
-    }
-
-    const setCurrentLink= ()=>{
-        let path = route.path
-        path = path.replace('/',"").toUpperCase()
-        currentLink.value = path
-        console.log(`hooks ${currentLink.value}`)
-    }
 
     const closeMenu = ()=>{
         status.value = "";
-        setCurrentLink();
     }
+
     const openNav = (setVal)=>{
         status.value = setVal
     }
@@ -35,10 +28,9 @@ export default function navCommonFun(){
 
     return {
         status,
-        currentLink,
+        infoIndexStatus,
+        infoIndexStatusComputed,
 
-        setCurrentLink,
-        setActive,
         closeMenu,
         openNav,
     }
