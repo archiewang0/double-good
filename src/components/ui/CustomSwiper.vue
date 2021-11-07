@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import  SwiperCore,{ Navigation, Pagination, Scrollbar, A11y ,Autoplay,FreeMode} from 'swiper';
+import  { Navigation, Pagination, Scrollbar, A11y ,Autoplay,FreeMode} from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue.js';
 import 'swiper/swiper-bundle.min.css';
 
 
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y,Autoplay,FreeMode])
+// SwiperCore.use([Navigation, Pagination, Scrollbar, A11y,Autoplay,FreeMode])
 
 import {computed} from 'vue';
 

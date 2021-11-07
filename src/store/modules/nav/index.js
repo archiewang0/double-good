@@ -6,7 +6,7 @@ export default {
     // 之後要使用 完全的命名方式取得vuex內容
     state(){
         return{
-            indexScrollHidden: true
+            indexScrollHidden: false
 
         }
     },

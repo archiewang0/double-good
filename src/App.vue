@@ -59,7 +59,6 @@ export default {
 		// 滾動事件
 		const wrapSrollevent = (e) =>{
 			if(route.path === '/'){
-				// console.log(e.target.scrollTop)
 				const scrollY = e.target.scrollTop
 
 				if(scrollY === 0 ){
