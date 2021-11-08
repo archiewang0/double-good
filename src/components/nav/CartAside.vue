@@ -23,16 +23,16 @@
                     </div>
 
                     <div class="quantityBox" >
-                        <a href="javascript:;" class="deleteBtn" @click="changeQuanVal('-',idx)"></a>
+                        <a href="javascript:;" class="deleteBtn" @click="changeQuanVal('-',idx,item)"></a>
                         <input type="number" min="1" max="99" :value="item.buyNum" :ref="setItemRef">
-                        <a href="javascript:;" class="addBtn" @click="changeQuanVal('+',idx)"></a>
+                        <a href="javascript:;" class="addBtn" @click="changeQuanVal('+',idx,item)"></a>
                     </div>
 
                     
-                    <p class="price" :data-price="item.price" :ref="setPricesRef"> {{item.price}} NT$</p>
+                    <p class="price" :data-price="item.price"> {{item.buyNum*item.price}} NT$</p>
         
                     <div class="delBtn">
-                        <a href="javascript:;">DELETE</a>
+                        <a href="javascript:;" @click="deleteProd(item)">DELETE</a>
                     </div>
                 </div>
 
@@ -68,27 +68,32 @@ export default {
         const cartItems = computed(()=> store.getters['cart/cartItems'])
 
 
-        function changeQuanVal(state,index){
+        function changeQuanVal(state,index,el){
             const taInput = itemsRefs[index]
-            const taPrice = pricesRefs[index]
-            if(state === '+'){
-                taInput.stepUp(1)
-                console.log(taInput.value)
-                console.log(taPrice.dataset.price)
-            } else{
-                taInput.stepDown(1)
-                console.log(taInput.value)
-                console.log(taPrice.dataset.price)
 
+            if(state === '+' && el.buyNum < 99){
+                taInput.stepUp(1)
+                el.buyNum ++
+            } else if(state === '-' && el.buyNum > 1){
+                taInput.stepDown(1)
+                el.buyNum --
             }
         }
 
 
-
+        function deleteProd(el){
+            const idx = cartItems.value.findIndex(item =>{  
+                console.log(item.pid) 
+                return  item.pid === el.pid
+            })
+            console.log(el.id)
+            
+            store.commit('cart/removeCartItem',idx)
+            console.log(el.pid)
+        }
 
 
         let itemsRefs = [];
-        let pricesRefs = [];
 
         const setItemRef = el =>{
             if(el){
@@ -96,11 +101,6 @@ export default {
             }
         }
 
-        const setPricesRef = el=>{
-            if(el){
-                pricesRefs.push(el)
-            }
-        }
 
 
         onBeforeUpdate(() => {
@@ -124,8 +124,8 @@ export default {
             cartItems,
 
             setItemRef,
-            setPricesRef,
 
+            deleteProd,
             changeQuanVal,
             closeCart,
         }

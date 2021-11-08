@@ -283,7 +283,7 @@ nav{
             .list{
                 flex-grow: 1000;
                 overflow: auto;
-                height: 59.4%;
+                height: calc(100% - 315px);
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
@@ -299,6 +299,7 @@ nav{
                     justify-content: space-between;
                     align-items: center;
                     border-bottom: 1px solid rgba($color: #000000, $alpha: .1);
+                    margin-bottom: 10px;
                     img{
                         width: 100px;
                         height: 100px;
@@ -375,6 +376,7 @@ nav{
                     }
 
                     .price{
+                        width: 150px;
                         font-size: 24px;
                         font-weight: 900;
                     }
