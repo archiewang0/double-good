@@ -39,10 +39,14 @@
 </style>
 
 <script>
+import { useStore} from 'vuex'
+
 export default {
-    setup(_,context) {
-        const closeMember =()=>{
-            context.emit('close')
+    setup() {
+        const store = useStore();
+
+        function closeMember(){
+            store.commit('nav/changeNavState',"")
         }
 
         return{

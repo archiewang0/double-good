@@ -6,7 +6,10 @@ export default {
     // 之後要使用 完全的命名方式取得vuex內容
     state(){
         return{
-            indexScrollHidden: false
+            indexScrollHidden: false,
+
+            // 接受string
+            navState: "",
 
         }
     },

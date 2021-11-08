@@ -130,7 +130,7 @@
     .deco{
         z-index: 0;
         position: absolute;
-        border: 1px solid rgba($color: white, $alpha: .3);
+        // border: 1px solid rgba($color: white, $alpha: .3);
         padding-top: 43%;
         width: 84%;
         top: 19%;
@@ -144,7 +144,7 @@
             bottom: -6%;
             width: 71%;
             padding-top: 43%;
-            border: 1px solid rgba($color: red, $alpha: .3);
+            // border: 1px solid rgba($color: red, $alpha: .3);
             background: url(~@/assets/img/vision_gif.gif) no-repeat center center;
             background-size: contain;
         }
@@ -244,6 +244,7 @@
                     font-weight: 900;
                     text-align: right;
                     padding-top: 10px;
+                    opacity: .6;
                     font-size: 24px;
                     border-top: 1px solid rgba($color: #000000, $alpha:.2);
                 }

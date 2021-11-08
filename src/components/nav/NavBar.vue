@@ -1,11 +1,11 @@
 <template>
     <!-- status -->
-    <nav :class="status">
+    <nav :class="navState" >
     <!-- <nav class="status"> -->
 
         <div class="navWrap">
             <div>
-                <a class="menuBtn" @click="openNav('active')" href="javascript:;" >
+                <a class="menuBtn" @click="changeNavState('active')" href="javascript:;" >
                     <div></div>
                     <div></div>
                     <div></div>
@@ -22,13 +22,13 @@
             <div>
                 <search-bar></search-bar>
 
-                <a class="cart" href="javascript:;" @click="openNav('cartActive')">
+                <a class="cart" href="javascript:;" @click="changeNavState('cartActive')">
                     <div>
                         <img src="../../assets/img/cart-icon.svg" alt="">
                     </div>
                 </a>
 
-                <a class="member" href="javascript:;" @click="openNav('memberActive')">
+                <a class="member" href="javascript:;" @click="changeNavState('memberActive')">
                     <div>
                         <img src="../../assets/img/member-icon.svg" alt="">
                     </div>
@@ -41,14 +41,14 @@
         <div class="aside forMenu">
             <div>
                 <div class="top">
-                    <router-link to="/" class="logo" @click="closeMenu">
+                    <router-link to="/" class="logo" @click="changeNavState('')">
                         <img src="../../assets/img/horizontal-logo-11.svg" alt="">
                     </router-link>
 
-                    <a class="closeBtn" href="javascript:;" @click="closeMenu"></a>
+                    <a class="closeBtn" href="javascript:;" @click="changeNavState('')"></a>
                 </div>
 
-                <div class="links" @click="closeMenu">
+                <div class="links" @click="changeNavState('')">
 
                     <router-link to="/products" :class="setActive.prod"><div></div>PRODUCTS</router-link>
                     <router-link to="/designer" :class="setActive.designer"><div></div>DESIGNER</router-link>
@@ -63,10 +63,10 @@
         </div>
 
         <!-- for cart--> 
-        <cart-aside @close="closeMenu"></cart-aside>
+        <cart-aside></cart-aside>
 
         <!-- for member -->
-        <member-aside @close="closeMenu"></member-aside>
+        <member-aside></member-aside>
 
 
         <nav-visual-info></nav-visual-info>
@@ -77,7 +77,8 @@
 
 <script>
 import { useRoute } from 'vue-router';
-import {computed  } from 'vue';
+import {computed } from 'vue';
+import {useStore} from 'vuex';
 
 
 import SearchBar from './SearchBar';
@@ -85,9 +86,6 @@ import MemberAside  from './MemberAside';
 import CartAside from './CartAside';
 import NavVisualInfo from './NavVisualInfo'
 
-
-
-import navMixins from '../../hooks/navMixins.js';
 
 
 
@@ -99,9 +97,18 @@ export default {
         NavVisualInfo
     },
     setup() {
-        const {status, closeMenu,openNav} = navMixins()
 
-        const route = useRoute()
+        const route = useRoute();
+        const store = useStore();
+
+        const navState = computed(()=>store.getters['nav/navState'])
+
+        
+        
+
+        function changeNavState (val){
+            store.commit('nav/changeNavState',val)
+        }
 
 
         const setActive = computed(()=>{
@@ -118,14 +125,11 @@ export default {
 
 
 
-
-
         return {
-            status,
-
+            navState,
             setActive,
-            closeMenu,
-            openNav,
+
+            changeNavState,
 
         }
     },

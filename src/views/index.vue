@@ -50,14 +50,15 @@
             </div>
         </div>
 
-        <div class="prodItemsContainer">
+        <div class="prodItemsContainer" ref="prodContainer">
             <masonry-wall 
                 :items="items" 
                 :column-width="350"
                 >
 
                 <!-- :gap="20" :column-width="300" :ssr-columns="1"   -->
-                <template #default="slot" >
+                <template #default="slot"  >
+
                     <a href="javascript:;">
 
                         <figure>
@@ -77,7 +78,7 @@
                         </div>
                     </a>
                     <div class="shopBtn">
-                        <a href="javascript:;" :date-id="slot.item.id">
+                        <a href="javascript:;" :date-id="slot.item.id" @click="addCart(slot.item)">
                             <p>
                                 ADD TO CART
                             </p>
@@ -93,9 +94,15 @@
 
 <script>
 
-import {ref} from 'vue';
+import {onMounted,onUnmounted, ref} from 'vue';
 import {onBeforeRouteLeave} from  'vue-router';
+import {useStore} from 'vuex';
 
+import gsap from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
     setup() {
@@ -182,6 +189,14 @@ export default {
         ])
 
         const prodBlock = ref(null)
+        const prodContainer = ref(null)
+        const store = useStore();
+
+        function addCart(prod){
+            store.commit('nav/changeNavState','cartActive')
+            console.log(prod)
+
+        }
 
         const srollTo = ()=>{
             // console.log(prodBlock.value)
@@ -192,11 +207,53 @@ export default {
             passSwiperVal.value.autoplay = null
         })
 
+
+
+        function gsapSet(){
+            const time =  setTimeout(()=>{
+                // console.log(document.querySelectorAll('.masonry-column'))
+                gsap.timeline({
+                    scrollTrigger: {
+                    trigger: prodContainer.value,
+                    scroller: ".wrap",
+                    }
+                }).from('.masonry-column',{
+                    y:100,
+                    stagger: 0.2,
+                    ease: "power4.out",
+                    duration: 2,
+                    opacity: 0,
+                })
+
+                clearTimeout(time)
+            },500)
+        }
+
+
+
+        onMounted(() => {
+            gsapSet();
+
+            ScrollTrigger.refresh();
+        });
+        onUnmounted(() => {
+            ScrollTrigger.getAll().forEach((trigger) => {
+                trigger.kill();
+            });
+        });
+
+
+
         return {
             items,
             slides,
-            prodBlock,
 
+            // 抓取element
+            prodBlock,
+            prodContainer,
+            // 抓取element
+
+            addCart,
             passSwiperVal,
             srollTo,
         }
