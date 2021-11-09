@@ -11,5 +11,9 @@ export default {
         state.cartItems.splice(payload,1)
         // console.log(state.cartItems)
         // console.log(payload)
+    },
+
+    updateCartItem(state,payload){
+        state.cartItems.splice(payload.idx,1,payload.item)
     }
 }

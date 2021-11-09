@@ -38,10 +38,11 @@
 
 
             </div>
+
             <div class="payBtn">
                 <div class="subtotal">
                     <p>SUBTOTAL</p>
-                    <p>200 NT$</p>
+                    <p>{{subtotalPrice}} NT$</p>
                 </div>
                 <div class="btn">
                     <a href="javascript:;">
@@ -67,6 +68,14 @@ export default {
 
         const cartItems = computed(()=> store.getters['cart/cartItems'])
 
+        const subtotalPrice = computed(()=>{
+            const arr = store.getters['cart/cartItems'];
+            let subtotal = 0
+            arr.forEach(el=> {subtotal = subtotal+ el.price* el.buyNum })
+
+            return subtotal
+        })
+
 
         function changeQuanVal(state,index,el){
             const taInput = itemsRefs[index]
@@ -78,18 +87,23 @@ export default {
                 taInput.stepDown(1)
                 el.buyNum --
             }
+            // console.log(store.getters['cart/cartItems'].findIndex(i=> i.pid === el.pid))
+
+            // 將資料丟到 vuex
+            let idx = store.getters['cart/cartItems'].findIndex(i=> i.pid === el.pid)
+            store.commit('cart/updateCartItem',{idx:idx ,item: el })
+
         }
 
 
         function deleteProd(el){
             const idx = cartItems.value.findIndex(item =>{  
-                console.log(item.pid) 
+                // console.log(item.pid) 
                 return  item.pid === el.pid
             })
-            console.log(el.id)
-            
+            // console.log(el.pid)
             store.commit('cart/removeCartItem',idx)
-            console.log(el.pid)
+            // console.log(el.pid)
         }
 
 
@@ -107,7 +121,7 @@ export default {
             itemsRefs = []
         })
         onUpdated(() => {
-            console.log(itemsRefs)
+            // console.log(itemsRefs)
             // console.log(itemsRefs.value[0].value)
         })
 
@@ -122,6 +136,8 @@ export default {
 
         return{
             cartItems,
+
+            subtotalPrice,
 
             setItemRef,
 
