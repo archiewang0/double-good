@@ -12,6 +12,19 @@
 			</router-view>
 		</div>
 
+		<footer>
+			<div>
+				<div class="logo">
+					<router-link to="/">
+						<img src="./assets/img/footer-logo-20.svg" alt="">
+					</router-link>
+				</div>
+				<p class="copyRgiht">
+					Copyright © 2021 DOUBLE GOOD.
+				</p>
+			</div>
+		</footer>
+
 	</div>
 </template>
 
@@ -100,6 +113,36 @@ export default {
 	}
 	.body{
 		padding-top: 60px;
+	}
+
+	footer{
+		background-color: white;
+		margin-top: 50px;
+		width: 100%;
+		padding: 50px 15px;
+		>div{
+			width: 90%;
+			margin: auto;
+			display: flex;
+			align-items: flex-end;
+			justify-content: space-between;
+			.logo{
+				height: 50px;
+				>a{
+					display: inline-block;
+					margin-right: auto;
+					height: 100%;
+					img{
+						height: 100%;
+					}
+				}
+			}
+			.copyRight{
+				font-size: 12px;
+				opacity: .5;
+
+			}
+		}
 	}
 }
 </style>

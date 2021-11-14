@@ -11,7 +11,7 @@
                     <div></div>
                 </a>
 
-                <router-link to="/" class="logo">
+                <router-link to="/" class="logo" :style="navLogoSetWidth">
                     <div>
                         <img src="../../assets/img/horizontal-logo-11.svg" alt="">
                     </div>
@@ -25,6 +25,9 @@
                 <a class="cart" href="javascript:;" @click="changeNavState('cartActive')">
                     <div>
                         <img src="../../assets/img/cart-icon.svg" alt="">
+                        <div class="prodsQuan" v-if="cartProdsQuan">
+                            <p>{{cartProdsQuan}}</p>
+                        </div>
                     </div>
                 </a>
 
@@ -102,7 +105,24 @@ export default {
         const store = useStore();
 
         const navState = computed(()=>store.getters['nav/navState'])
-
+        const cartProdsQuan = computed(()=>{
+            let prodsQuan = store.getters['cart/cartProdsQuan']
+            if(prodsQuan === 0){
+                return false
+            } else if (prodsQuan >= 99){
+                return '99+'
+            } else{
+                return prodsQuan
+            }
+        })
+        const navLogoSetWidth = computed(()=>{
+            let isSet = store.getters['nav/indexScrollHidden']
+            if(!isSet && route.path === "/"){
+                return {width: '0px'}
+            } else{
+                return {}
+            }
+        })
         
         
 
@@ -128,6 +148,8 @@ export default {
         return {
             navState,
             setActive,
+            cartProdsQuan,
+            navLogoSetWidth,
 
             changeNavState,
 

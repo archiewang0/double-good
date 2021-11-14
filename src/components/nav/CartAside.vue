@@ -3,7 +3,7 @@
         <div>
             <div class="top">
                 <p>
-                    YOUR CART <span>(0)</span>
+                    YOUR CART <span>({{cartProdsQuan}})</span>
                 </p>
                 
                 <a class="closeBtn" href="javascript:;" @click="closeCart"></a>
@@ -41,7 +41,7 @@
             <div class="payBtn">
                 <div class="subtotal">
                     <p>SUBTOTAL</p>
-                    <p>200 NT$</p>
+                    <p>{{cartTotalPrice}} NT$</p>
                 </div>
                 <div class="btn">
                     <a href="javascript:;">
@@ -66,6 +66,8 @@ export default {
         const store = useStore();
 
         const cartItems = computed(()=> store.getters['cart/cartItems'])
+        const cartTotalPrice = computed(()=> store.getters['cart/cartTotal'])
+        const cartProdsQuan = computed(()=> store.getters['cart/cartProdsQuan'] )
 
 
         function changeQuanVal(state,index,el){
@@ -83,13 +85,12 @@ export default {
 
         function deleteProd(el){
             const idx = cartItems.value.findIndex(item =>{  
-                console.log(item.pid) 
+                // console.log(item.pid) 
                 return  item.pid === el.pid
             })
-            console.log(el.id)
             
             store.commit('cart/removeCartItem',idx)
-            console.log(el.pid)
+            // console.log(el.pid)
         }
 
 
@@ -122,6 +123,8 @@ export default {
 
         return{
             cartItems,
+            cartTotalPrice,
+            cartProdsQuan,
 
             setItemRef,
 
