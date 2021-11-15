@@ -1,20 +1,37 @@
 <template>
     <main>
         <div class="searchInfo">
-            <div class="searchInput">
-                <input type="text" value="bag" placeholder="請輸入商品名稱,或是商品的類別">
+            <div class="recommend">
                 <a href="javascript:;">
-                    <img src="../assets/img/search-icon.svg" alt="">
+                    BAG
+                </a>
+                <a href="javascript:;">
+                    HAT
+                </a>
+                <a href="javascript:;">
+                    CLOTHES
+                </a>
+                <a href="javascript:;">
+                    PANTS
+                </a>
+                <a href="javascript:;">
+                    SHOES
                 </a>
             </div>
 
-            <p>約有10項,搜尋結果</p>
+            <sort-select></sort-select>
         </div>
     </main>
 </template>
 
 <script>
+import SortSelect from '../components/product/SortSelect'
+
+
 export default {
+    components:{
+        SortSelect
+    },
     setup() {
         
     },

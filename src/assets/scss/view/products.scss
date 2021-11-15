@@ -1,33 +1,63 @@
 .searchInfo{
     background-color: white;
-    padding: 15px;
-    .searchInput{
+    padding: 20px 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .recommend{
         display: flex;
-        max-width: 500px;
-        margin-right: auto;
         justify-content: flex-start;
         align-items: center;
-        border-bottom: 2px solid #0b2659;
-        input{
-            border: none;         
-            color: #0b2659;
-            outline: none;
-            font-size: 30px;
-            opacity: .8;
-            background-color: transparent;
+        >a{
+            font-size: 16px;
+            border: 1px solid #0b2659;
+            padding: 10px 20px;
+            margin-right: 20px;
             transition: all ease .3s;
-            font-weight: 900;
-            font-family: 'Noto Sans TC', sans-serif;
-            flex-grow: 1;
-            &:focus{
-                opacity: 1;
+            &:hover{
+                background-color: #0b2659;
                 color: white;
             }
         }
-        >a{
-            img{
-                height: 30px;
+    }
+
+    .sort{
+        width: 180px;
+        line-height: 1.5;
+        text-align: left;
+        padding-left: 15px;
+        border-bottom: 1px solid black;
+
+        position: relative;
+        .list{
+            position: absolute;
+            bottom: 1px;
+            left: 0;
+            transform: translate(0,100%);
+            width: 100%;
+            background-color: white;
+            padding-top: 10px;
+            >a{
+                display: block;
+                padding: 5px 15px ;
+
+                transition: all ease .3s;
+                &:hover{
+                    background-color: #0b2659;
+                    color: white;
+                }
             }
+        }
+
+        &::after{
+            content: "";
+            position: absolute;
+            top: 5px;
+            right: 0;
+            display: block;
+            width: 15px;
+            height: 15px;
+            background: url(~@/assets/img/down_arrow-22.svg) no-repeat center center;
         }
     }
 }

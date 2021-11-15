@@ -107,7 +107,7 @@ import {onMounted,onUnmounted, ref} from 'vue';
 import {onBeforeRouteLeave} from  'vue-router';
 import {useStore} from 'vuex';
 
-import gsap from 'gsap';
+import gsap,{Power2} from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 
@@ -274,11 +274,11 @@ export default {
             titleTl.add([
                 gsap.to(bannerTitle.value,{x:50,opacity:0,duration: .3}),
                 gsap.to(bannerInfo.value,{x:50,opacity:0,duration: .3}),
-                gsap.to(bannerImgs,{scale:.8,duration: .5})
+                gsap.to(bannerImgs,{scale:.8,duration: .5, ease: Power2})
             ]).add([
                 gsap.to(bannerTitle.value,{x:0,opacity:1,duration: .3}),
                 gsap.to(bannerInfo.value,{x:0,opacity:1,duration: .3,delay: .2}),
-                gsap.to(bannerImgs,{scale:1,duration: .5})
+                gsap.to(bannerImgs,{scale:1,duration: .5,ease: Power2})
             ])
             
                 
