@@ -1,4 +1,4 @@
-.searchInfo{
+.recommendSortBar{
     background-color: white;
     padding: 20px 70px;
     display: flex;
@@ -41,7 +41,7 @@
                 display: block;
                 padding: 5px 15px ;
 
-                transition: all ease .3s;
+                // transition: all ease .3s;
                 &:hover{
                     background-color: #0b2659;
                     color: white;
@@ -58,6 +58,61 @@
             width: 15px;
             height: 15px;
             background: url(~@/assets/img/down_arrow-22.svg) no-repeat center center;
+        }
+    }
+}
+
+.searchInfo{
+    padding: 20px 50px;
+    >div{
+        display: flex;
+        border-bottom: 2px solid rgba($color: white, $alpha: .2);
+
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding: 0 50px;
+        padding-bottom: 20px;
+        
+        >.title{
+            margin-right: 50px;
+            >p{
+                color: white;
+                max-width: 1200px;
+                font-size: 62px;
+                font-weight: 900;
+                font-family: 'Noto Sans TC', sans-serif;
+                letter-spacing: 2px;
+                line-height: 1.5;
+                opacity: 1;
+                overflow:hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+        >.info{
+            padding-left: 20px;
+            position: relative;
+            >p{
+                font-size: 14px;
+                line-height: 1.5;
+                letter-spacing: 1px;
+                vertical-align: bottom;
+                color: white;
+                text-align: left;
+                opacity: .8;
+            }
+            &::after{
+                content: "";
+                display: block;
+                width: 50px;
+                height: 1px;
+                position: absolute;
+                background-color: rgba($color: white, $alpha: .6);
+                bottom: 0;
+                left: 0;
+                transform-origin: left;
+                transform: rotate(-80deg);
+            }
         }
     }
 }

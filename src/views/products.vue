@@ -1,6 +1,6 @@
 <template>
     <main>
-        <div class="searchInfo">
+        <div class="recommendSortBar">
             <div class="recommend">
                 <a href="javascript:;">
                     BAG
@@ -20,6 +20,19 @@
             </div>
 
             <sort-select></sort-select>
+        </div>
+
+
+        <div class="searchInfo">
+            <div>
+                <div class="title">
+                    <p>Bag</p>
+                </div>
+                <div class="info">
+                    <p>針對你搜尋的內容</p>
+                    <p>有 10 項符合產品</p>
+                </div>
+            </div>
         </div>
     </main>
 </template>

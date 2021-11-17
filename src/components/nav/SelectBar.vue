@@ -11,20 +11,13 @@
 </template>
 
 <script>
-import {ref} from 'vue';
+import selectMixins from '../../hooks/selectMixins';
+// import {ref} from 'vue';
 export default {
     setup(){
-        const open = ref(false)
-        const currentVal = ref('PRODOUCT')
-
-        const toggleSelect = ()=>{
-            open.value = !open.value
-        }
-
-        const changeVal = (e) => {
-            currentVal.value = e.target.innerText
-            open.value = false
-        }
+        
+        // defaultVal 給予初始直
+        const {toggleSelect,changeVal,open,currentVal} = selectMixins('PRODOUCT')
 
         return{
             toggleSelect,
