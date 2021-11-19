@@ -39,7 +39,7 @@
         </div>
 
 
-        <div class="prodBlock" ref="prodBlock">
+        <div class="prodBlock" ref="prodBlock" >
             <div>
                 <div class="title">
                     <p>Find things you'll love. Support independent brand.</p>
@@ -52,7 +52,7 @@
 
         <div class="prodItemsContainer" ref="prodContainer">
             <masonry-wall 
-                :items="items" 
+                :items="products" 
                 :column-width="350"
                 >
 
@@ -93,7 +93,7 @@
         <div class="loadMoreBlock">
             <div class="loadBtn">
                 <router-link to="/products">
-                    LOAD MORE
+                    MORE 🡆
                 </router-link>
             </div>
         </div>
@@ -103,12 +103,15 @@
 
 <script>
 
-import {onMounted,onUnmounted, ref} from 'vue';
+import {onMounted,onUnmounted, ref,computed} from 'vue';
 import {onBeforeRouteLeave} from  'vue-router';
 import {useStore} from 'vuex';
 
 import gsap,{Power2} from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import prodAnimate from '../hooks/productsAnimate';
+import prodsMixins from '../hooks/prodsMixins';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -116,7 +119,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default {
     setup() {
         const prodBlock = ref(null)
-        const prodContainer = ref(null)
+
+        const {productFadeIn,prodContainer} = prodAnimate()
+        const {addCart} = prodsMixins()
 
         const bannerTitle = ref(null)
         const bannerInfo = ref(null)
@@ -124,39 +129,12 @@ export default {
 
         const store = useStore();
 
+        const products =  computed(()=>store.getters['prod/products'])
+
 
         let titleTl = gsap.timeline();
         // 將動畫寫入 gsapSet 讓他在mounted 的時候寫入
 
-        const items = ref([
-            { pid:1,name:'良品好物',designer:'Archie',type:'bag',price:600,
-                img: require('../assets/img/knitwear_cardigan_cashmere_brown_1.jpg'),
-                title: 'First', description: 'The first item.'},
-            { pid:2,name:'好視良物',designer:'Una',type:'shoe',price:500,
-                img: require('../assets/img/5f00209a79f96.jpg'),
-                title: 'three', description: 'The three item.'},
-            { pid:3,name:'Mac Pro',designer:'Chester',type:'clothes',price:1000,
-                img: require('../assets/img/8850539_Afteroom_Lounge_Chair_Afteroom_Black_03.jpg'),
-                title: 'three', description: 'The three item.'},
-            { pid:4,name:'Pikachu',designer:'Chester',type:'clothes',price:1600,
-                img: require('../assets/img/8e80e7_96e2abc235c541cc813b704e1.jpg'),
-                title: 'three', description: 'The three item.'},
-            { pid:5,name:'Audi AG',designer:'Archie',type:'clothes',price:1600,
-                img: require('../assets/img/a-cold-wall_focus_leather_trio-3.jpg'),
-                title: 'three', description: 'The three item.'},
-            { pid:6,name:'IKEA',designer:'Archie',type:'clothes',price:1600,
-                img: require('../assets/img/app001prod (3).jpg'),
-                title: 'three', description: 'The three item.'},
-            { pid:7,name:'Banner Bar',designer:'Archie',type:'clothes',price:200,
-                img: require('../assets/img/a_cold_wall-acw-converse-onyx-fo2.jpg'),
-                title: 'three', description: 'The three item.'},
-            { pid:8,name:'Charizard',designer:'Archie',type:'clothes',price:200,
-                img: require('../assets/img/a7e7cae3-6f49-49f2-b9c5-0242b882d870_LARGE.jpg'),
-                title: 'three', description: 'The three item.'},
-            { pid:9,name:'Peppa Pig',designer:'Archie',type:'clothes',price:200,
-                img: require('../assets/img/a_cold_wall-acw-converse-onyx-foe.jpg'),
-                title: 'three', description: 'The three item.'},
-        ])
 
         const passSwiperVal = ref({
             createSwiperFun: ()=>{console.log('建立swiper')},
@@ -230,37 +208,8 @@ export default {
                 content: 'sapiente aspernatur qui consequatur maxime ad tempora laudantium blanditiis eligendi. Rem consequatur tenetur quos cupiditate eius provident voluptate quas atque? Doloribus dolorem ex, fuga porro nisi sit?'},
         ])
 
-        function addCart(prod){
-            store.commit('nav/changeNavState','cartActive')
-
-            let cartProds = store.getters['cart/cartItems'];
-
-            let isDuplicate = false;
-            cartProds.forEach((item,index)=>{
-                if(item.pid === prod.pid){
-                    console.log('重複了購物車內容')
-                    isDuplicate =true;
-                    store.commit('cart/updateCartItem',{
-                        idx: index,
-                        updateInfo: {
-                            buyNum: item.buyNum + 1
-                        },
-                    })
-                }
-            })
-
-            if(!isDuplicate){
-                store.commit('cart/addItemToCart',{
-                    ...prod,
-                    buyNum: 1,
-                })
-            }
-            // console.log(prod)
-
-        }
 
         const srollTo = ()=>{
-            // console.log(prodBlock.value)
             prodBlock.value.scrollIntoView({behavior: "smooth"});
         }
 
@@ -281,34 +230,16 @@ export default {
                 gsap.to(bannerImgs,{scale:1,duration: .5,ease: Power2})
             ])
             
-                
 
-
-            const time =  setTimeout(()=>{
-                // console.log(document.querySelectorAll('.masonry-column'))
-                gsap.timeline({
-                    scrollTrigger: {
-                    trigger: prodContainer.value,
-                    scroller: ".wrap",
-                    }
-                }).from('.masonry-column',{
-                    y:100,
-                    stagger: 0.2,
-                    ease: "power4.out",
-                    duration: 2,
-                    opacity: 0,
-                })
-
-                clearTimeout(time)
-            },500)
         }
-
 
 
         onMounted(() => {
             bannerImgs = document.querySelectorAll('.swiper-slide figure')
             
             gsapSet();
+
+            productFadeIn(prodContainer.value)
 
             ScrollTrigger.refresh();
         });
@@ -321,7 +252,7 @@ export default {
 
 
         return {
-            items,
+            products,
             slides,
 
             // 抓取element
@@ -341,5 +272,6 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/view/index';
+@import '../assets/scss/components/prodItemContainer';
 
 </style>

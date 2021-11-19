@@ -1,10 +1,11 @@
-.recommendSortBar{
+.filterSortBar{
     background-color: white;
     padding: 20px 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .recommend{
+    margin-bottom: 100px;
+    .filter{
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -14,7 +15,7 @@
             padding: 10px 20px;
             margin-right: 20px;
             transition: all ease .3s;
-            &:hover{
+            &:hover,&.active{
                 background-color: #0b2659;
                 color: white;
             }
@@ -63,14 +64,19 @@
 }
 
 .searchInfo{
-    padding: 20px 50px;
+    padding: 0 50px;
+    padding-bottom: 100px;
     >div{
         display: flex;
+        max-width: 1400px;
+        width: 100%;
+        margin: auto;
+        
         border-bottom: 2px solid rgba($color: white, $alpha: .2);
 
         align-items: flex-end;
         justify-content: flex-start;
-        padding: 0 50px;
+        // padding: 0 50px;
         padding-bottom: 20px;
         
         >.title{

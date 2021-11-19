@@ -1,7 +1,7 @@
 <template>
     <div class="selectBar">
         <a class="main" @click="toggleSelect" href="javascript:;">
-            <p>{{currentVal}}</p>
+            <p>{{defaultSelectVal}}</p>
         </a>
         <div class="list" v-if="open">
             <a href="javascript:;" @click="changeVal">PRODOUCT</a>
@@ -14,16 +14,21 @@
 import selectMixins from '../../hooks/selectMixins';
 // import {ref} from 'vue';
 export default {
-    setup(){
+    props:['defaultSelectVal'],
+    setup(_,context){
         
         // defaultVal 給予初始直
-        const {toggleSelect,changeVal,open,currentVal} = selectMixins('PRODOUCT')
+        const {toggleSelect,open} = selectMixins('PRODOUCT')
+
+        function changeVal(e){
+            context.emit('update:defaultSelectVal',e.target.textContent)
+            toggleSelect()
+        }
 
         return{
             toggleSelect,
-            changeVal,
             open,
-            currentVal,
+            changeVal
         }
     }
 }

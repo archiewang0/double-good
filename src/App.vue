@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap" :class="status" @scroll.prevent="wrapSrollevent">
+	<div id="wrap" class="wrap" :class="status" @scroll.prevent="wrapSrollevent">
 		<nav-bar></nav-bar>
 
 		<div class="body">

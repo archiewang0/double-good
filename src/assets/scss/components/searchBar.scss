@@ -25,6 +25,11 @@
         // transform: translate(0,10%);
         margin-right: 10px;
         cursor: pointer;
+        transition: transform ease .3s;
+
+        &.scale{
+            transform: scale(1.2);
+        }
     }
 
     input[type="text"]{
@@ -35,4 +40,9 @@
         position: absolute;
         bottom: 0;
     }
+
+    &:focus-within{
+        border: 2px solid black;
+    }
 }
+

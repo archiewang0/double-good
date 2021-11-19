@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import MasonryWall from '@yeger/vue-masonry-wall'
 
+
 import TestUi from './components/ui/TestUi';
 import CustomSwiper from './components/ui/CustomSwiper';
 
@@ -17,7 +18,10 @@ app.component('masonry-wall',MasonryWall)
 
 app.use(router)
 app.use(store)
-// app.use(MasonryWall)
+router.afterEach(()=>{
+    document.querySelector('#wrap').scrollTop = 0
+})
+
 
 
 app.mount('#app')
