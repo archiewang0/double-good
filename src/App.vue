@@ -1,8 +1,7 @@
 <template>
-	<div id="wrap" class="wrap" :class="status" @scroll.prevent="wrapSrollevent">
 		<nav-bar></nav-bar>
 
-		<div class="body">
+		<main>
 			<router-view v-slot="{ Component }">
 				<transition
 					@enter="enter"
@@ -10,7 +9,7 @@
 					<component :is="Component" />
 				</transition>
 			</router-view>
-		</div>
+		</main>
 
 		<footer>
 			<div>
@@ -25,7 +24,6 @@
 			</div>
 		</footer>
 
-	</div>
 </template>
 
 <script>
@@ -34,10 +32,6 @@ import {useStore} from 'vuex';
 
 import {ref} from 'vue';
 import NavBar from './components/nav/NavBar'
-
-
-// hooks
-// import navMixins from './hooks/navMixins.js';
 
 //套件
 import gsap from 'gsap';
@@ -70,26 +64,25 @@ export default {
 		}
 
 		// 滾動事件
-		const wrapSrollevent = (e) =>{
+		const scrollFunc = () =>{
 			if(route.path === '/'){
-				const scrollY = e.target.scrollTop
-
+				// scrollY = window.scrollY window 可以省略
 				if(scrollY === 0 ){
 					store.commit('nav/toggleIndexScrollHiddenStatus',false)
-					console.log('傳送false')
 				} else{
 					store.commit('nav/toggleIndexScrollHiddenStatus',true)
-					console.log('傳送true')
 				}
 			}
 		}
+
+		window.addEventListener('scroll',scrollFunc)
 
 
 		return {
 			status,
 			enter,
 			afterEnter,
-			wrapSrollevent,
+			// wrapSrollevent,
 		};
 	}
 }
@@ -97,6 +90,25 @@ export default {
 
 <style  lang="scss">
 @import './assets/scss/common/_reset';
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #e4e4e4; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: rgb(170, 170, 170); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #0b2659;; 
+}
 
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -106,12 +118,8 @@ export default {
 	color: #2c3e50;
 	width: 100%;
 	background-color: gray;
-	min-height: 100vh;
-	.wrap{
-		overflow-x: hidden;
-		height: 100vh;
-	}
-	.body{
+	>main{
+		// padding: 1px;
 		padding-top: 60px;
 	}
 

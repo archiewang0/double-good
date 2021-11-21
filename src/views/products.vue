@@ -2,23 +2,23 @@
     <main>
         <div class="filterSortBar">
             <div class="filter">
-                <a href="javascript:;" class="active">
-                    All
+                <a href="javascript:;" :class="setActive.all" @click="addFilter">
+                    ALL
                 </a>
-                <a href="javascript:;">
+                <a href="javascript:;" :class="setActive.bag" @click="addFilter">
                     BAG
                 </a>
-                <a href="javascript:;">
+                <a href="javascript:;" :class="setActive.hat" @click="addFilter">
                     HAT
                 </a>
-                <a href="javascript:;">
+                <a href="javascript:;" :class="setActive.clothes" @click="addFilter">
                     CLOTHES
                 </a>
-                <a href="javascript:;">
+                <a href="javascript:;" :class="setActive.pants" @click="addFilter">
                     PANTS
                 </a>
-                <a href="javascript:;">
-                    SHOES
+                <a href="javascript:;" :class="setActive.shoes" @click="addFilter">
+                    SHOE
                 </a>
             </div>
 
@@ -26,14 +26,14 @@
         </div>
 
 
-        <div class="searchInfo">
+        <div class="searchInfo" v-if="searchContent">
             <div>
                 <div class="title">
-                    <p>Bag</p>
+                    <p>{{searchContent}}</p>
                 </div>
                 <div class="info">
                     <p>針對你搜尋的內容</p>
-                    <p>有 10 項符合產品</p>
+                    <p>有 {{products.length}} 項符合產品</p>
                 </div>
             </div>
         </div>
@@ -88,6 +88,8 @@ import prodsMixins from '../hooks/prodsMixins'
 
 import {useStore} from 'vuex';
 import {computed,onMounted} from 'vue'
+import {useRoute,useRouter} from 'vue-router';
+
 
 export default {
     components:{
@@ -95,9 +97,89 @@ export default {
     },
     setup() {
         const store = useStore();
-        const products =  computed(()=>store.getters['prod/products'])
+        const route = useRoute();
+        const router = useRouter();
+
+
+        const products =  computed(()=>{
+            // 拷貝一個array 用來針對排序 或是篩選用的
+            let prods = Array.from(store.getters['prod/products'])
+            
+
+            // sort by
+            if(route.query.sort){
+                switch(route.query.sort){
+                    case "1":
+                        prods.sort(function(a,b){
+                            let nameA = a.name.toUpperCase();
+                            let nameB = b.name.toUpperCase();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        })
+                        break;
+                    case "2":
+                        prods.sort(function(a,b){
+                            return  b.price - a.price  
+                        })
+                        break;
+                    case "3":
+                        prods.sort(function(a,b){
+                            return a.price - b.price
+                        })
+                        break;
+                }
+            } else {
+                prods = store.getters['prod/products']
+            }
+
+            // search
+            if(route.query.q){
+                prods = prods.filter(prod =>{
+                    return prod.name.toUpperCase().includes(route.query.q.toUpperCase())
+                })
+            }
+
+            // filter
+            if(route.query.filter && route.query.filter !== "ALL"){
+                prods = prods.filter(prod =>{
+                    return prod.type.toUpperCase() == route.query.filter
+                })
+            }   
+
+            return prods
+        })
         const {productFadeIn,prodContainer} = prodAnimate()
         const {addCart} = prodsMixins();
+
+        const searchContent = computed(()=> route.query.q)
+
+        function addFilter(e){
+            router.push({
+                name:'prod',
+                query: {
+                    ...route.query,
+                    filter: e.target.textContent.trim()
+                }
+            })
+        }
+
+        const setActive = computed(()=>{
+            const curLink = route.query.filter
+
+            return{
+                all: {'active': curLink === 'ALL' || !curLink },
+                bag: {'active': curLink === 'BAG'},
+                hat: {'active': curLink === 'HAT'},
+                clothes: {'active': curLink === 'CLOTHES'},
+                pants: {'active': curLink === 'PANTS'},
+                shoes: {'active': curLink === 'SHOE'},
+            }
+        })
 
         onMounted(()=>{
             productFadeIn(prodContainer.value)
@@ -106,15 +188,22 @@ export default {
         return{
             prodContainer,
             products,
+            searchContent,
+
+            setActive,
 
             addCart,
+            addFilter,
         }
     },
-    beforeRouteEnter(to,from,next){
-        console.log('component beforeRouteEnter')
-        console.log(to,from)
-        next()
-    },
+    // beforeRouteUpdate(_,_2,next){
+    //     console.log('在該component 修改id 或是 query meta')
+    //     next()
+    // },
+    // beforeRouteEnter(to){
+    //     console.log(to)
+    //     console.log('從別的地方進入該conpoonent')
+    // }
 }
 </script>
 

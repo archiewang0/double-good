@@ -1,6 +1,6 @@
 <template>
     <!-- status -->
-    <nav :class="navState" >
+    <nav :class="navState" ref="navEl">
     <!-- <nav class="status"> -->
 
         <div class="navWrap">
@@ -80,7 +80,7 @@
 
 <script>
 import { useRoute } from 'vue-router';
-import {computed } from 'vue';
+import {computed ,onUpdated,ref} from 'vue';
 import {useStore} from 'vuex';
 
 
@@ -144,12 +144,27 @@ export default {
         })
 
 
+        onUpdated(()=>{
+            let classVal = navEl.value.getAttribute('class')
+            if(classVal){
+                document.querySelector('html').style.overflow="hidden"
+                document.querySelector('body').style.overflow="hidden"
+            } else{
+                document.querySelector('html').removeAttribute('style')
+                document.querySelector('body').removeAttribute('style')
+            }
+        })
+
+        const navEl = ref(null)
+
+
 
         return {
             navState,
             setActive,
             cartProdsQuan,
             navLogoSetWidth,
+            navEl,
 
             changeNavState,
 

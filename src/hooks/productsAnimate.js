@@ -11,7 +11,6 @@ export default function(){
             gsap.timeline({
                 scrollTrigger: {
                 trigger: target,
-                scroller: ".wrap",
                 }
             }).to('.masonry-column',{
                 y:0,

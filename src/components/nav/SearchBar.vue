@@ -16,18 +16,23 @@
 <script>
 import {ref} from 'vue';
 import SelectBar from './SelectBar';
+import {useRouter} from 'vue-router'
 export default {
     components:{
         SelectBar,
     },
     setup(){
+        const router = useRouter();
         const defaultSelectVal = ref('PRODOUCT')
         const searchVal = ref('')
         const searchBtn = ref(null)
 
         function submit(){
             if(searchVal.value){
-                alert(searchVal.value)
+                // alert(searchVal.value)
+                router.push({name: 'prod',query:{q:searchVal.value}})
+            } else{
+                router.push({name:'prod'})
             }
         }
 
@@ -47,6 +52,8 @@ export default {
 
         }
 
+        
+
         return{
             defaultSelectVal,
             searchVal,
@@ -57,7 +64,7 @@ export default {
             submit,
             scaleBtn
         }
-    }
+    },
 }
 </script>
 

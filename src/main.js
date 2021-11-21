@@ -18,9 +18,7 @@ app.component('masonry-wall',MasonryWall)
 
 app.use(router)
 app.use(store)
-router.afterEach(()=>{
-    document.querySelector('#wrap').scrollTop = 0
-})
+
 
 
 

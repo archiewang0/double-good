@@ -93,7 +93,7 @@
         <div class="loadMoreBlock">
             <div class="loadBtn">
                 <router-link to="/products">
-                    MORE 🡆
+                    MORE  PRODUCTS
                 </router-link>
             </div>
         </div>
@@ -104,7 +104,7 @@
 <script>
 
 import {onMounted,onUnmounted, ref,computed} from 'vue';
-import {onBeforeRouteLeave} from  'vue-router';
+// import {onBeforeRouteLeave} from  'vue-router';
 import {useStore} from 'vuex';
 
 import gsap,{Power2} from 'gsap';
@@ -137,7 +137,8 @@ export default {
 
 
         const passSwiperVal = ref({
-            createSwiperFun: ()=>{console.log('建立swiper')},
+            // createSwiperFun: ()=>{console.log('建立swiper')},
+            createSwiperFun: null,
             // 如果需要帶入 function 不需要則帶入null
             swiperChangeFun: (e)=>{
                 // console.log(bannerImgs)
@@ -212,11 +213,6 @@ export default {
         const srollTo = ()=>{
             prodBlock.value.scrollIntoView({behavior: "smooth"});
         }
-
-        onBeforeRouteLeave(()=>{
-            passSwiperVal.value.autoplay = null
-        })
-
 
 
         function gsapSet(){

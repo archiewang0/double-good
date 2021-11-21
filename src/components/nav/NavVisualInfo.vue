@@ -64,7 +64,7 @@ export default {
         // 如果希望他直接反應 就必須第一個computed 
         const infoIndexShow = computed(()=>{
             let path = useRoute().path
-            console.log('滑動是否觸發')
+            // console.log('滑動是否觸發')
             return {indexShow:  path == '/' && !store.getters['nav/indexScrollHidden'] }
         })
 
