@@ -53,11 +53,11 @@
 
                 <div class="links" @click="changeNavState('')">
 
-                    <router-link to="/products" :class="setActive.prod"><div></div>PRODUCTS</router-link>
-                    <router-link to="/designer" :class="setActive.designer"><div></div>DESIGNER</router-link>
-                    <router-link to="/about" :class="setActive.about"><div></div>ABOUT</router-link>
-                    <router-link to="/contact" :class="setActive.contact"><div></div>CONTACT</router-link>
-                    <router-link to="/member" :class="setActive.member"><div></div>MEMBER</router-link>
+                    <router-link to="/products" ><div></div>PRODUCTS</router-link>
+                    <router-link to="/designer"><div></div>DESIGNER</router-link>
+                    <router-link to="/about"><div></div>ABOUT</router-link>
+                    <router-link to="/contact" ><div></div>CONTACT</router-link>
+                    <router-link to="/member"><div></div>MEMBER</router-link>
 
                 </div>
 
@@ -131,17 +131,17 @@ export default {
         }
 
 
-        const setActive = computed(()=>{
-            const curLink = route.path.replace('/',"").toUpperCase()
+        // const setActive = computed(()=>{
+        //     const curLink = route.path.replace('/',"").toUpperCase()
 
-            return{
-                prod: {'active': curLink === 'PRODUCTS'},
-                about: {'active': curLink === 'ABOUT'},
-                contact: {'active': curLink === 'CONTACT'},
-                designer: {'active': curLink === 'DESIGNER'},
-                member: {'active': curLink === 'MEMBER'},
-            }
-        })
+        //     return{
+        //         prod: {'active': curLink === 'PRODUCTS'},
+        //         about: {'active': curLink === 'ABOUT'},
+        //         contact: {'active': curLink === 'CONTACT'},
+        //         designer: {'active': curLink === 'DESIGNER'},
+        //         member: {'active': curLink === 'MEMBER'},
+        //     }
+        // })
 
 
         onUpdated(()=>{
@@ -161,7 +161,7 @@ export default {
 
         return {
             navState,
-            setActive,
+            // setActive,
             cartProdsQuan,
             navLogoSetWidth,
             navEl,
