@@ -25,8 +25,6 @@
             <sort-select></sort-select>
         </div>
 
-        <router-link to="/products/3">點我</router-link>
-        <router-view></router-view>
 
         <div class="searchInfo" v-if="searchContent">
             <div>

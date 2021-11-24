@@ -125,7 +125,7 @@ export default {
 
 	footer{
 		background-color: white;
-		margin-top: 50px;
+		margin-top: 125px;
 		width: 100%;
 		padding: 50px 15px;
 		>div{

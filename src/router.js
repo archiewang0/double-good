@@ -6,15 +6,14 @@ import member from './views/member.vue';
 import designer from './views/designer.vue';
 import about from './views/about.vue';
 import contact from './views/contact.vue';
-import prodItem from './components/product/ProdItem';
+import prodItem from './views/ProdItem';
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {path: "/", component:index },
-        {path: "/products", name: 'prod',component: products , children:[{
-            path: ':pid' ,component: prodItem, props: true
-        }]},
+        {path: "/products", name: 'prod',component: products },
+        {path: '/products/:pid' ,component: prodItem, props: true},
         {path: "/member", component: member},
         {path: "/designer", component: designer},
         {path: "/about", component: about},
