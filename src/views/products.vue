@@ -47,10 +47,10 @@
                 <!-- :gap="20" :column-width="300" :ssr-columns="1"   -->
                 <template #default="slot"  >
 
-                    <a href="javascript:;">
+                    <router-link :to="{name:'prodItem', params:{pid: slot.item.pid}}">
 
                         <figure>
-                            <img :src="slot.item.img" alt="">
+                            <img :src="slot.item.coverImg" alt="">
                         </figure>
 
                         <div class="info">
@@ -64,7 +64,7 @@
 
                             <p>{{slot.item.price}} NT$</p>
                         </div>
-                    </a>
+                    </router-link>
                     <div class="shopBtn">
                         <a href="javascript:;" :date-id="slot.item.id" @click="addCart(slot.item)">
                             <p>
@@ -101,10 +101,8 @@ export default {
         const router = useRouter();
 
 
-        const products =  computed(()=>{
-            // 拷貝一個array 用來針對排序 或是篩選用的
-            let prods = Array.from(store.getters['prod/products'])
-            
+        const products = computed(()=>{
+            let prods = store.getters['prod/products'];
 
             // sort by
             if(route.query.sort){
@@ -133,8 +131,6 @@ export default {
                         })
                         break;
                 }
-            } else {
-                prods = store.getters['prod/products']
             }
 
             // search
@@ -149,10 +145,14 @@ export default {
                 prods = prods.filter(prod =>{
                     return prod.type.toUpperCase() == route.query.filter
                 })
-            }   
+            } 
 
             return prods
         })
+
+        // array.sort 無法被computed給偵測
+        // const finalProds = computed(()=>products)
+
         const {productFadeIn,prodContainer} = prodAnimate()
         const {addCart} = prodsMixins();
 
@@ -187,6 +187,7 @@ export default {
 
         return{
             prodContainer,
+            // finalProds,
             products,
             searchContent,
 

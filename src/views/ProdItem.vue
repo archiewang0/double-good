@@ -1,5 +1,20 @@
 <template>
-    <h1>hollo word - {{pid}}</h1>
+
+    <div>
+        <h1>hollo word - {{pid}}</h1>
+        <div class="prodItem">
+            <figure>
+                <img src="../assets/img/1.jpg" alt="">
+            </figure>
+            <div class="content">
+                <div class="name">
+                    {{prodInfo.name}} 
+                    <span>{{prodInfo.type}}</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </template>
 
 <script>
@@ -13,10 +28,10 @@ export default {
 
         let prodInfo = store.getters['prod/products'].find(i=>i.pid == props.pid)
 
-
-
         console.log(prodInfo)
-
+        return{
+            prodInfo
+        }
     },
 }
 </script>

@@ -4,9 +4,9 @@
             <p>{{currentSelected}}</p>
         </a>
         <div class="list" v-if="open">
-            <a href="javascript:;" @click="changeVal" data-val="1">Name A-Z</a>
-            <a href="javascript:;" @click="changeVal" data-val="2">$ High to Low</a>
-            <a href="javascript:;" @click="changeVal" data-val="3">$ Low to High</a>
+            <a href="javascript:;" @click="changeVal" data-val="1" :class="setStyle.name">Name A-Z</a>
+            <a href="javascript:;" @click="changeVal" data-val="2" :class="setStyle.high">$ High to Low</a>
+            <a href="javascript:;" @click="changeVal" data-val="3" :class="setStyle.low">$ Low to High</a>
         </div>
     </div>
 </template>
@@ -37,7 +37,7 @@ export default {
             if(route.query.sort ==="1"){
                 return "Name A-Z"
             } else if(route.query.sort ==="2"){
-                return "$ High tO Low"
+                return "$ High to Low"
             } else if(route.query.sort ==="3"){
                 return "$ Low to High"
             } else{
@@ -45,12 +45,20 @@ export default {
             }
         })
 
+        const setStyle = computed(()=>{
+            return {
+                name: {'active': currentSelected.value == 'Name A-Z' },
+                high: {'active': currentSelected.value == '$ High to Low' },
+                low: {'active': currentSelected.value == '$ Low to High' },
+            }
+        })
 
         return{
             toggleSelect,
             changeVal,
             open,
-            currentSelected
+            currentSelected,
+            setStyle,
         }
     },
 }

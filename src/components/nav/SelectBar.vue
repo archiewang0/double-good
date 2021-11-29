@@ -4,7 +4,7 @@
             <p>{{defaultSelectVal}}</p>
         </a>
         <div class="list" v-if="open">
-            <a href="javascript:;" @click="changeVal">PRODOUCT</a>
+            <a href="javascript:;" @click="changeVal">PRODUCT</a>
             <a href="javascript:;" @click="changeVal">DESIGNER</a>
         </div>
     </div>
@@ -18,7 +18,7 @@ export default {
     setup(_,context){
         
         // defaultVal 給予初始直
-        const {toggleSelect,open} = selectMixins('PRODOUCT')
+        const {toggleSelect,open} = selectMixins('PRODUCT')
 
         function changeVal(e){
             context.emit('update:defaultSelectVal',e.target.textContent)

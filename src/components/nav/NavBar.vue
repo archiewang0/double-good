@@ -54,7 +54,7 @@
                 <div class="links" @click="changeNavState('')">
 
                     <router-link to="/products" ><div></div>PRODUCTS</router-link>
-                    <router-link to="/designer"><div></div>DESIGNER</router-link>
+                    <router-link to="/designers"><div></div>DESIGNER</router-link>
                     <router-link to="/about"><div></div>ABOUT</router-link>
                     <router-link to="/contact" ><div></div>CONTACT</router-link>
                     <router-link to="/member"><div></div>MEMBER</router-link>

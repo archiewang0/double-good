@@ -1,0 +1,19 @@
+.designers{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1600px;
+    margin: auto;
+    >div{
+        width: calc(calc(100% / 4) - 20px);
+        margin: 10px;
+        >a{
+            display: block;
+            width: 100%;
+            background-color: white;
+            padding: 10px;
+        }
+    }
+}

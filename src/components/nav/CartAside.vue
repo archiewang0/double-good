@@ -13,7 +13,7 @@
 
                 <div class="cartItem" v-for="(item, idx) in cartItems" :key="item.id">
                     <div class="prodInfo">
-                        <img :src="item.img" alt="">
+                        <img :src="item.coverImg" alt="">
                         
                         <div>
                             <p>{{item.designer}}</p>

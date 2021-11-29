@@ -3,7 +3,7 @@ import { createRouter, createWebHistory} from 'vue-router';
 import index from './views/index.vue';
 import products from './views/products.vue';
 import member from './views/member.vue';
-import designer from './views/designer.vue';
+import designers from './views/designers.vue';
 import about from './views/about.vue';
 import contact from './views/contact.vue';
 import prodItem from './views/ProdItem';
@@ -13,9 +13,9 @@ const router = createRouter({
     routes: [
         {path: "/", component:index },
         {path: "/products", name: 'prod',component: products },
-        {path: '/products/:pid' ,component: prodItem, props: true},
+        {path: '/products/:pid',name:'prodItem' ,component: prodItem, props: true},
         {path: "/member", component: member},
-        {path: "/designer", component: designer},
+        {path: "/designers", name: 'design', component: designers},
         {path: "/about", component: about},
         {path: "/contact", component: contact},
         {path: '/:pathMatch(.*)*', redirect: '/'}

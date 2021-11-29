@@ -59,10 +59,10 @@
                 <!-- :gap="20" :column-width="300" :ssr-columns="1"   -->
                 <template #default="slot"  >
 
-                    <a href="javascript:;">
+                    <router-link :to="{name:'prodItem', params:{pid: slot.item.pid}}">
 
                         <figure>
-                            <img :src="slot.item.img" alt="">
+                            <img :src="slot.item.coverImg" alt="">
                         </figure>
 
                         <div class="info">
@@ -76,7 +76,8 @@
 
                             <p>{{slot.item.price}} NT$</p>
                         </div>
-                    </a>
+                    </router-link>
+
                     <div class="shopBtn">
                         <a href="javascript:;" :date-id="slot.item.id" @click="addCart(slot.item)">
                             <p>
@@ -131,7 +132,6 @@ export default {
 
         const products =  computed(()=>store.getters['prod/products'])
 
-
         let titleTl = gsap.timeline();
         // 將動畫寫入 gsapSet 讓他在mounted 的時候寫入
 
@@ -149,8 +149,8 @@ export default {
 
                 let time = setTimeout(()=>{
                     subtitle.textContent = slides.value[e.realIndex].subtitle
-                    title.textContent = slides.value[e.realIndex].tilte
-                    contentTitle.textContent = slides.value[e.realIndex].scondTitle
+                    title.textContent = slides.value[e.realIndex].title
+                    contentTitle.textContent = slides.value[e.realIndex].secondTitle
                     contentPara.textContent = slides.value[e.realIndex].content
 
                     clearTimeout(time)                
@@ -192,20 +192,20 @@ export default {
             {
                 img: require('../assets/img/banner-one.jpg'),
                 subtitle: '新品上市',
-                tilte: 'NEWEST!!',
-                scondTitle: 'XXOO Brand from Alex Bagshawe start selling...',
+                title: 'NEWEST!!',
+                secondTitle: 'XXOO Brand from Alex Bagshawe start selling...',
                 content: 'XXOO 獨立品牌,來自於 Designer Alex Bagshawe 親自操刀,運用幾何線條以及對比強烈的色彩、大膽的配色、已成為 Alex Bagshawe 獨有的視覺風格、使用義大利進口皮革 , 精緻的車工縫線、手指的碰觸都可以感受到細部的質感紋理、在台灣時間2021/1/1開始在...'},
             {
                 img: require('../assets/img/banner-two5.jpg'),
                 subtitle: '聖誕優惠',
-                tilte: 'XMAS GIFTS',
-                scondTitle: 'All testful gifts start selling in Dooble ...',
+                title: 'XMAS GIFTS',
+                secondTitle: 'All testful gifts start selling in Dooble ...',
                 content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae veritatis itaque quisquam fuga repudiandae harum blanditiis delectus, eligendi a cum, dolor recusandae debitis laudantium explicabo tenetur sint quas.'},
             {
                 img: require('../assets/img/banner-three.jpg'),
                 subtitle: '最佳賣家',
-                tilte: 'TOP SELLER',
-                scondTitle: 'Discover popular proudct in  dooble good...',
+                title: 'TOP SELLER',
+                secondTitle: 'Discover popular proudct in  dooble good...',
                 content: 'sapiente aspernatur qui consequatur maxime ad tempora laudantium blanditiis eligendi. Rem consequatur tenetur quos cupiditate eius provident voluptate quas atque? Doloribus dolorem ex, fuga porro nisi sit?'},
         ])
 

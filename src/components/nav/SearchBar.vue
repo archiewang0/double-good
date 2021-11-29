@@ -23,16 +23,25 @@ export default {
     },
     setup(){
         const router = useRouter();
-        const defaultSelectVal = ref('PRODOUCT')
+        const defaultSelectVal = ref('PRODUCT')
         const searchVal = ref('')
         const searchBtn = ref(null)
 
         function submit(){
+            console.log(defaultSelectVal)
             if(searchVal.value){
                 // alert(searchVal.value)
-                router.push({name: 'prod',query:{q:searchVal.value}})
+                if(defaultSelectVal.value == 'PRODUCT'){
+                    router.push({name: 'prod',query:{q:searchVal.value}})
+                } else{
+                    router.push({name: 'design',query:{q:searchVal.value}})
+                }
             } else{
-                router.push({name:'prod'})
+                if(defaultSelectVal.value == 'PRODUCT'){
+                    router.push({name:'prod'})
+                } else{
+                    router.push({name:'design'})
+                }
             }
         }
 
