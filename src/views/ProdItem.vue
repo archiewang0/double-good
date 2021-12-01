@@ -63,28 +63,29 @@
 <script>
 // import {onBeforeMount} from 'vue'
 import {useStore} from 'vuex';
-import {useRouter} from 'vue-router';
+// import {useRouter} from 'vue-router';
+import storeJs from '../store/index';
 
 export default {
     props:['pid'],
     setup(props) {
         const store = useStore();
-        const router = useRouter();
+        // const router = useRouter();
         console.log(props.pid)
 
 
         let prodInfo = store.getters['prod/products'].find(i=>i.pid == props.pid)
 
 
-        if(!store.getters['prod/products'].find(i=>i.pid == props.pid)){
-            alert('沒有該商品項目')
-            router.replace({
-                path: "/"
-            })
-        }
+        // if(!store.getters['prod/products'].find(i=>i.pid == props.pid)){
+        //     alert('沒有該商品項目')
+        //     router.replace({
+        //         path: "/"
+        //     })
+        // }
 
         // onBeforeMount(()=>{
- 
+
         // })
 
         
@@ -97,17 +98,19 @@ export default {
             designerInfo,
         }
     },
-    beforeRouteEnter(to){
-        const store = useStore();
-        const router = useRouter();
+    beforeRouteEnter(to,_,next){
+        // const router = useRouter();
         const pagePid = to.params.pid
         // let prodInfo = store.getters['prod/products'].find(i=>i.pid == to.params.pid)
-        if(!to.params.pid){
-            router.replace({
+        console.log(to)
+
+        if(!storeJs.getters['prod/products'].find(i=>i.pid == pagePid)){
+            next({
                 path: "/"
             })
+        } else{
+            next()
         }
-        console.log(to)
     },
 }
 </script>
