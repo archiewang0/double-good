@@ -30,7 +30,7 @@
 
                     <div class="price">
                         <p class="key">PRICE</p>
-                        <p class="val">{{prodInfo.description}}</p>
+                        <p class="val">{{prodInfo.price}}</p>
                     </div>
 
                     <div class="quantity">
@@ -61,15 +61,33 @@
 </template>
 
 <script>
-import {useStore} from 'vuex'
+// import {onBeforeMount} from 'vue'
+import {useStore} from 'vuex';
+import {useRouter} from 'vue-router';
 
 export default {
     props:['pid'],
     setup(props) {
         const store = useStore();
+        const router = useRouter();
         console.log(props.pid)
 
+
         let prodInfo = store.getters['prod/products'].find(i=>i.pid == props.pid)
+
+
+        if(!store.getters['prod/products'].find(i=>i.pid == props.pid)){
+            alert('沒有該商品項目')
+            router.replace({
+                path: "/"
+            })
+        }
+
+        // onBeforeMount(()=>{
+ 
+        // })
+
+        
         let designerInfo = store.getters['design/designers'].find(i=>i.did == prodInfo.did )
 
         console.log(prodInfo)
@@ -78,6 +96,18 @@ export default {
             prodInfo,
             designerInfo,
         }
+    },
+    beforeRouteEnter(to){
+        const store = useStore();
+        const router = useRouter();
+        const pagePid = to.params.pid
+        // let prodInfo = store.getters['prod/products'].find(i=>i.pid == to.params.pid)
+        if(!to.params.pid){
+            router.replace({
+                path: "/"
+            })
+        }
+        console.log(to)
     },
 }
 </script>

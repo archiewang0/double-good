@@ -58,9 +58,13 @@
                     flex-wrap: nowrap;
                     justify-content: center;
                     align-items: center;
+                    >*{
+                        font-size: 26px;
+                    }
                     .key{
                         width: 20%;
                         border: 1px solid black;
+                        text-align: left;
                     }
                     .val{
                         width: 80%;
