@@ -89,10 +89,10 @@ export default {
                 taInput.stepDown(1)
                 el.buyNum --
             }
-            // console.log(store.getters['cart/cartItems'].findIndex(i=> i.pid === el.pid))
 
             // 將資料丟到 vuex
             let idx = store.getters['cart/cartItems'].findIndex(i=> i.pid === el.pid)
+            // 需要給予 index 與 object的資訊
             store.commit('cart/updateCartItem',{idx:idx ,item: el })
 
         }
@@ -122,6 +122,7 @@ export default {
         onBeforeUpdate(() => {
             itemsRefs = []
         })
+
         onUpdated(() => {
             // console.log(itemsRefs)
             // console.log(itemsRefs.value[0].value)

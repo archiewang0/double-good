@@ -14,13 +14,16 @@
                     <span>( {{prodInfo.type}} )</span>
                 </div>
 
-                <router-link class="designer" :to="{name:'designerInfo',params:{did: prodInfo.did}}">
-                    <img :src="designerInfo.portrait" alt="">
-                    <div>
-                        <p>Designer:</p>
-                        <p class="name">{{designerInfo.name}}</p>
-                    </div>
-                </router-link>
+                <div  class="designer">
+                    <router-link :to="{name:'designerInfo',params:{did: prodInfo.did}}">
+                        <img :src="designerInfo.portrait" alt="">
+                        <div>
+                            <p>Designer:</p>
+                            <p class="name">{{designerInfo.name}}</p>
+                        </div>
+                    </router-link>
+                </div>
+
 
                 <div class="prodInfo">
                     <div class="description">
@@ -28,82 +31,95 @@
                         <p class="val">{{prodInfo.description}}</p>
                     </div>
 
+                    <div class="quantity">
+                        <p class="key">QUANTITY</p>
+                        <div class="val">
+                            <div class="quantityBox">
+                                <a href="javascript:;" @click="changeQuanVal('-',prodInfo)">-</a>
+                                <input type="number" value="1" min="1" max="99" ref="quantityVal">
+                                <a href="javascript:;" @click="changeQuanVal('+',prodInfo)">+</a>
+                            </div>
+    
+                        </div>
+                    </div>
+
                     <div class="price">
                         <p class="key">PRICE</p>
                         <p class="val">{{prodInfo.price}}</p>
                     </div>
 
-                    <div class="quantity">
-                        <p class="key">QUANTITY</p>
-                        <div class="val">
-                            <a href="javascript:;">-</a>
-                            <input type="number" value="1" min="1">
-                            <a href="javascript:;">+</a>
-                        </div>
-                    </div>
-
                     <div class="subtotal">
                         <p class="key">SUBTOTAL</p>
-                        <p class="val">1000 NT$</p>
+                        <p class="val">{{subtotal}} NT$</p>
                     </div>
                 </div>
 
 
                 <div class="btn">
-                    <a href="javascript:;">
+                    <a href="javascript:;" @click="addCart(prodInfo,true)">
                         ADD TO CART
                     </a>
                 </div>
             </div>
         </div>
 
+
     </div>
 </template>
 
 <script>
-// import {onBeforeMount} from 'vue'
+import {ref , computed} from 'vue';
 import {useStore} from 'vuex';
-// import {useRouter} from 'vue-router';
 import storeJs from '../store/index';
+import prodsMixins from '../hooks/prodsMixins'
 
 export default {
     props:['pid'],
     setup(props) {
         const store = useStore();
-        // const router = useRouter();
-        console.log(props.pid)
+        // console.log(props.pid)
+        const quantityVal = ref(null)
+
+        let prodInfo = ref({
+            ...store.getters['prod/products'].find(i=>i.pid == props.pid),
+            buyNum: 1,
+        })
+
+        let designerInfo = store.getters['design/designers'].find(i=>i.did == prodInfo.value.did )
+
+        function changeQuanVal(state,el){
+            if(state === '+' && el.buyNum < 99){
+                quantityVal.value.stepUp(1)
+                el.buyNum ++
+            } else if(state === '-' && el.buyNum > 1){
+                quantityVal.value.stepDown(1)
+                el.buyNum --
+            }
+        }
+
+        const subtotal = computed(()=>{
+            let total = prodInfo.value.buyNum *  prodInfo.value.price
+            return total
+        })
 
 
-        let prodInfo = store.getters['prod/products'].find(i=>i.pid == props.pid)
+        const {addCart} = prodsMixins();
 
 
-        // if(!store.getters['prod/products'].find(i=>i.pid == props.pid)){
-        //     alert('沒有該商品項目')
-        //     router.replace({
-        //         path: "/"
-        //     })
-        // }
-
-        // onBeforeMount(()=>{
-
-        // })
-
-        
-        let designerInfo = store.getters['design/designers'].find(i=>i.did == prodInfo.did )
-
-        console.log(prodInfo)
-        console.log(designerInfo)
         return{
             prodInfo,
             designerInfo,
+            changeQuanVal,
+
+            quantityVal,
+            subtotal,
+            addCart,
         }
     },
     beforeRouteEnter(to,_,next){
-        // const router = useRouter();
         const pagePid = to.params.pid
-        // let prodInfo = store.getters['prod/products'].find(i=>i.pid == to.params.pid)
-        console.log(to)
-
+        // 無法使用 import {useStore} from 'vuex'
+        // 要使用 vuex 的話 需要 import storeJs from '../store/index'; 可以避免命名相同 取不一樣的名稱
         if(!storeJs.getters['prod/products'].find(i=>i.pid == pagePid)){
             next({
                 path: "/"
