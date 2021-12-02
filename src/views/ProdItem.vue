@@ -80,6 +80,7 @@ export default {
         // console.log(props.pid)
         const quantityVal = ref(null)
 
+        // 這邊改回computed
         let prodInfo = ref({
             ...store.getters['prod/products'].find(i=>i.pid == props.pid),
             buyNum: 1,
