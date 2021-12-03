@@ -4,6 +4,7 @@
     padding-top: 80px;
     >.prodItem{
         max-width: 1200px;
+        max-height: 80vh;
         width: 100%;
         margin: auto;
         display: flex;
@@ -14,14 +15,20 @@
     
         >figure{
             >img{
+                height: 100%;
                 width: 100%;
+                object-fit: cover;
             }
         }
 
         >.content{
             background-color: white;
+            overflow-y: auto;
             flex-grow: 1;
-            padding:30px 20px ;
+            padding:30px 20px;
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
             .prodName{
                 font-size: 30px;
                 font-weight: 900;
@@ -72,7 +79,8 @@
             }
             
             .prodInfo{
-                // border: 1px solid red;
+                flex-grow: 100;
+
                 >*{
                     display: flex;
                     flex-wrap: nowrap;
@@ -132,7 +140,7 @@
             }
 
             .btn{
-                padding:  15px 0;
+                padding-top: 15px;
 
                 a{
                     display: block;

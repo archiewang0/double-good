@@ -25,7 +25,6 @@ export default {
         function changeVal(e){
             open.value = false
             router.push({
-                name: 'prod',
                 query:{
                     ...route.query,
                     sort: e.target.dataset.val

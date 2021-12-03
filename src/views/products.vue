@@ -1,42 +1,9 @@
 <template>
     <main>
-        <div class="filterSortBar">
-            <div class="filter">
-                <a href="javascript:;" :class="setActive.all" @click="addFilter">
-                    ALL
-                </a>
-                <a href="javascript:;" :class="setActive.bag" @click="addFilter">
-                    BAG
-                </a>
-                <a href="javascript:;" :class="setActive.hat" @click="addFilter">
-                    HAT
-                </a>
-                <a href="javascript:;" :class="setActive.clothes" @click="addFilter">
-                    CLOTHES
-                </a>
-                <a href="javascript:;" :class="setActive.pants" @click="addFilter">
-                    PANTS
-                </a>
-                <a href="javascript:;" :class="setActive.shoes" @click="addFilter">
-                    SHOE
-                </a>
-            </div>
 
-            <sort-select></sort-select>
-        </div>
+        <filter-sort-bar :filter="true" :sort="true"></filter-sort-bar>
 
-
-        <div class="searchInfo" v-if="searchContent">
-            <div>
-                <div class="title">
-                    <p>{{searchContent}}</p>
-                </div>
-                <div class="info">
-                    <p>針對你搜尋的內容</p>
-                    <p>有 {{products.length}} 項符合產品</p>
-                </div>
-            </div>
-        </div>
+        <search-info :search-content="searchContent" :search-target="products"></search-info>
 
         <div class="prodItemsContainer" ref="prodContainer">
             <masonry-wall 
@@ -44,7 +11,6 @@
                 :column-width="350"
                 >
 
-                <!-- :gap="20" :column-width="300" :ssr-columns="1"   -->
                 <template #default="slot"  >
 
                     <router-link :to="{name:'prodItem', params:{pid: slot.item.pid}}">
@@ -81,25 +47,27 @@
 </template>
 
 <script>
-import SortSelect from '../components/product/SortSelect'
+
+import SearchInfo from '../components/page/SearchInfo';
+import FilterSortBar from '../components/page/FilterSortBar';
+
 
 import prodAnimate from '../hooks/productsAnimate'
 import prodsMixins from '../hooks/prodsMixins'
 
 import {useStore} from 'vuex';
 import {computed,onMounted} from 'vue'
-import {useRoute,useRouter} from 'vue-router';
+import {useRoute} from 'vue-router';
 
 
 export default {
     components:{
-        SortSelect
+        SearchInfo,
+        FilterSortBar
     },
     setup() {
         const store = useStore();
         const route = useRoute();
-        const router = useRouter();
-
 
         const products = computed(()=>{
             let prods = store.getters['prod/products'];
@@ -152,34 +120,10 @@ export default {
 
         // array.sort 無法被computed給偵測
         // const finalProds = computed(()=>products)
-
         const {productFadeIn,prodContainer} = prodAnimate()
         const {addCart} = prodsMixins();
 
         const searchContent = computed(()=> route.query.q)
-
-        function addFilter(e){
-            router.push({
-                name:'prod',
-                query: {
-                    ...route.query,
-                    filter: e.target.textContent.trim()
-                }
-            })
-        }
-
-        const setActive = computed(()=>{
-            const curLink = route.query.filter
-
-            return{
-                all: {'active': curLink === 'ALL' || !curLink },
-                bag: {'active': curLink === 'BAG'},
-                hat: {'active': curLink === 'HAT'},
-                clothes: {'active': curLink === 'CLOTHES'},
-                pants: {'active': curLink === 'PANTS'},
-                shoes: {'active': curLink === 'SHOE'},
-            }
-        })
 
         onMounted(()=>{
             productFadeIn(prodContainer.value)
@@ -191,25 +135,13 @@ export default {
             products,
             searchContent,
 
-            setActive,
-
             addCart,
-            addFilter,
+
         }
     },
-    // beforeRouteUpdate(_,_2,next){
-    //     console.log('在該component 修改id 或是 query meta')
-    //     next()
-    // },
-    // beforeRouteEnter(to){
-    //     console.log(to)
-    //     console.log('從別的地方進入該conpoonent')
-    // }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/view/products';
 @import '../assets/scss/components/prodItemContainer';
-
 </style>

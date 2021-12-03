@@ -8,7 +8,7 @@ export default {
             products: [
                 { pid:1,name:'良品好物',did:1,type:'bag',price:600,
                 coverImg: require('@/assets/img/knitwear_cardigan_cashmere_brown_1.jpg'),
-                title: 'First', description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam laudantium nostrum vitae consectetur repellat molestiae non nesciunt repellendus. Unde quis voluptatum quam beatae consequuntur, facilis placeat est provident qui eius. Sint reiciendis, culpa expedita illum quia distinctio at tempore nesciunt blanditiis doloribus, voluptatem voluptate, explicabo ipsum. Architecto saepe excepturi amet'},
+                title: 'First', description: 'Lorem ipsum dolor sit repellat molestiae non nesciunt repellendus. Unde quis voluptatum quam beatae consequuntur, facilis placeat est provident qui eius. Sint reiciendis, tempore nesciunt blanditiis doloribus, voluptatem voluptate, explicabo ipsum. Architecto saepe excepturi amet'},
                 { pid:2,name:'好視良物',did:2 ,type:'shoe',price:500,
                 coverImg: require('@/assets/img/5f00209a79f96.jpg'),
                     title: 'three', description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elie non nesciunt repelluuntur, facilis placeat est provident qui eius. Sint reiciendis, culpa expedita illum quia distinctio at tempore nesciunt blanditiis doloribus, voluptatem voluptate, explicabo ipsum. Architecto saepe excepturi amet'},
@@ -20,7 +20,7 @@ export default {
                     title: 'three', description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam laudantium non nesciunt repellendus. Unde quis voluptatum quam beatae consequuntur, facilis placeat est provident qui eius. Sint reiciendis, culpa expedita illum quia distinctio at tempore nesciunt blanditiis dol amet'},
                 { pid:5,name:'Audi AG',did:5 ,type:'clothes',price:1600,
                 coverImg: require('@/assets/img/a-cold-wall_focus_leather_trio-3.jpg'),
-                    title: 'three', description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam laudantium nostrum vitae consectetur repellat chitecto saepe excepturi amet'},
+                    title: 'three', description: 'Lorem ipsum dolor sit repellat chitecto saepe excepturi amet'},
                 { pid:6,name:'IKEA',did: 1,type:'clothes',price:1600,
                 coverImg: require('@/assets/img/app001prod (3).jpg'),
                     title: 'three', description: 'Lorem ipsum dolor sit amet consectetur, quam beatae consequuntur, facilis placeat est provident qui eius. Sint reiciendis, culpa expedita illum quia distinctio at tempore nesciunt blanditiis doloribus, voluptatem voluptate, explicabo ipsum. Architecto saepe excepturi amet'},

@@ -103,20 +103,19 @@ export default {
             return total
         })
 
-
         const {addCart} = prodsMixins();
-
+ 
 
         return{
             prodInfo,
             designerInfo,
             changeQuanVal,
-
             quantityVal,
             subtotal,
             addCart,
         }
     },
+    
     beforeRouteEnter(to,_,next){
         const pagePid = to.params.pid
         // 無法使用 import {useStore} from 'vuex'
