@@ -12,12 +12,12 @@ export default function(){
                 scrollTrigger: {
                 trigger: target,
                 }
-            }).to('.masonry-column',{
-                y:0,
+            }).from('.masonry-column',{
+                y: 100,
                 stagger: 0.2,
                 ease: "power4.out",
                 duration: 2,
-                opacity: 1,
+                opacity: 0,
             })
 
             clearTimeout(time)

@@ -53,7 +53,7 @@
         <div class="prodItemsContainer" ref="prodContainer">
             <masonry-wall 
                 :items="products" 
-                :column-width="350"
+                :column-width="300"
                 >
 
                 <!-- :gap="20" :column-width="300" :ssr-columns="1"   -->

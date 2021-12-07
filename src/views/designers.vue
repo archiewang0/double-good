@@ -6,29 +6,28 @@
 
         <div class="designers">
             <div v-for="designer in designers" :key="designer.did">
-                <a href="javascript:;" class="designerInfo">
+                <div class="designerInfo">
 
                     <figure class="prodContainer">
-                        <span v-for="(prod,idx) in designer.designerProdInfo" :key="idx">
+                        <router-link :to="'/products/'+prod.pid" v-for="(prod,idx) in designer.designerProdInfo" :key="idx">
                             <img :src="prod.coverImg">
-                        </span>
+                        </router-link>
                     </figure>
 
-                    <img class="portrait" :src="designer.portrait" >
 
-
-                    <div class="infoContainer">
+                    <router-link :to="'/designers/'+designer.did" class="infoContainer">
+                        <img class="portrait" :src="designer.portrait" >
                         <p class="name">{{designer.name}}</p>
                         <p class="country">{{designer.country}}</p>
-                        <p class="prodsType">
-                            <span v-for="type in designer.prodsType" :key="type">
-                                {{type.toUpperCase()}}
-                            </span>
-                        </p>
+                    </router-link>
+
+                    <div class="prodsType">
+                        <router-link :to="'/products?filter='+type.toUpperCase()" v-for="type in designer.prodsType" :key="type" >
+                            {{type.toUpperCase()}}
+                        </router-link>
                     </div>
 
-
-                </a>
+                </div>
             </div>
         </div>
     </div>
@@ -65,12 +64,20 @@ export default {
                 item.designerProdInfo = prodInfo
             })
 
-
+            // search
             if(route.query.q){
                 data = data.filter(d =>{
                     return d.name.toUpperCase().includes(route.query.q.toUpperCase())
                 })
             }
+
+            // filter
+            if(route.query.filter && route.query.filter !== "ALL"){
+                data = data.filter(dataItem =>{
+                    return dataItem.prodsType.join(' ').toUpperCase().includes(route.query.filter.toUpperCase())  
+                })
+            }
+
             return data
         })
 

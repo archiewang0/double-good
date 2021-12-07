@@ -8,13 +8,12 @@
         <div class="prodItemsContainer" ref="prodContainer">
             <masonry-wall 
                 :items="products" 
-                :column-width="350"
+                :column-width="300"
                 >
 
                 <template #default="slot"  >
 
                     <router-link :to="{name:'prodItem', params:{pid: slot.item.pid}}">
-
                         <figure>
                             <img :src="slot.item.coverImg" alt="">
                         </figure>
@@ -38,8 +37,8 @@
                             </p>
                         </a>
                     </div>
-
                 </template>
+
             </masonry-wall>
         </div>
 
@@ -52,11 +51,11 @@ import SearchInfo from '../components/page/SearchInfo';
 import FilterSortBar from '../components/page/FilterSortBar';
 
 
-import prodAnimate from '../hooks/productsAnimate'
+// import prodAnimate from '../hooks/productsAnimate'
 import prodsMixins from '../hooks/prodsMixins'
 
 import {useStore} from 'vuex';
-import {computed,onMounted} from 'vue'
+import {computed} from 'vue'
 import {useRoute} from 'vue-router';
 
 
@@ -120,17 +119,17 @@ export default {
 
         // array.sort 無法被computed給偵測
         // const finalProds = computed(()=>products)
-        const {productFadeIn,prodContainer} = prodAnimate()
+        // const {productFadeIn,prodContainer} = prodAnimate()
         const {addCart} = prodsMixins();
 
         const searchContent = computed(()=> route.query.q)
 
-        onMounted(()=>{
-            productFadeIn(prodContainer.value)
-        })
+        // onMounted(()=>{
+        //     productFadeIn(prodContainer.value)
+        // })
 
         return{
-            prodContainer,
+            // prodContainer,
             // finalProds,
             products,
             searchContent,
