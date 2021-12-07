@@ -2,7 +2,7 @@
     <div class="wrap">
         <div>
 
-            <div class="IntroContainer">
+            <div class="IntroContainer" ref="stickyEl">
                 <figure>
                     <img :src="designIntro.portrait" alt="">
                 </figure>
@@ -59,10 +59,12 @@
             </div>
         </div>
 
+
     </div>
 </template>
 
 <script>
+import { onMounted, ref } from '@vue/runtime-core';
 import { useStore } from 'vuex'
 import prodsMixins from '../hooks/prodsMixins'
 
@@ -76,6 +78,8 @@ export default {
 
         const designIntro = store.getters['design/designers'].find((i=>i.did == props.did))
 
+        const stickyEl = ref(null)
+
         // 將 prodsId 變成字串 方便搜尋, 如果依舊array 的話就會使用到雙迴圈
         let idString = designIntro.prodIds.join(' ').toUpperCase()
 
@@ -83,10 +87,24 @@ export default {
 
         const {addCart} = prodsMixins();
 
+        
+        onMounted(()=>{
+            document.querySelector('body').style.overflow="unset"
+            // let el = stickyEl.value
+            // console.log(el.getBoundingClientRect().top)
+            // window.addEventListener('scroll',()=>{
+            //     if(scrollY > el.getBoundingClientRect().top){
+            //         el.style.position="fixed";
+            //         el.style.top="120px";
+            //     } else{
+            //         el.removeAttribute('style')
+            //     }
+            // })
+        })
         return{
             designIntro,
             designerProds,
-
+            stickyEl,
             addCart
         }
     },

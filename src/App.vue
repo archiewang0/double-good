@@ -2,7 +2,7 @@
 		<nav-bar></nav-bar>
 
 		<main>
-			<router-view v-slot="{ Component }">
+			<router-view v-slot="{ Component }" ref="aniEl">
 				<transition
 					@enter="enter"
 					@afterEnter="afterEnter">
@@ -47,13 +47,19 @@ export default {
 		const route = useRoute();
 		const store = useStore();
 
+		const aniEl = ref(null)
+
 		const enter = (el,done)=>{
 			gsap.from(el,{
 				duration: .5,
 				x: '20px',
 				opacity: 0,
 				// ease: 'bounce.out',
-				onComplete: done
+				onComplete: ()=>{
+					console.log(aniEl.value.$el)
+					aniEl.value.$el.removeAttribute('style')
+					done()
+				}
 			})
 		}
 
@@ -80,6 +86,7 @@ export default {
 
 		return {
 			status,
+			aniEl,
 			enter,
 			afterEnter,
 			// wrapSrollevent,
