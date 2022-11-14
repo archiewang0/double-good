@@ -51,13 +51,24 @@
                     <a class="closeBtn" href="javascript:;" @click="changeNavState('')"></a>
                 </div>
 
-                <div class="links" @click="changeNavState('')">
+                <div class="links" >
 
-                    <router-link to="/products" ><div></div>PRODUCTS</router-link>
-                    <router-link to="/designers"><div></div>DESIGNER</router-link>
-                    <router-link to="/about"><div></div>ABOUT</router-link>
-                    <router-link to="/contact" ><div></div>CONTACT</router-link>
-                    <router-link to="/member"><div></div>MEMBER</router-link>
+                    <router-link 
+                        to="/products" 
+                        @click="changeNavState('')"><div></div>PRODUCTS</router-link>
+                    <router-link 
+                        to="/designers"
+                        @click="changeNavState('')"><div></div>DESIGNER</router-link>
+                    <router-link 
+                        to="/about"
+                        @click="changeNavState('')"><div></div>ABOUT</router-link>
+                    <router-link 
+                        to="/contact" 
+                        @click="changeNavState('')"><div></div>CONTACT</router-link>
+                    <!-- <router-link to="/member"><div></div>MEMBER</router-link> -->
+                    <a 
+                        href="javascript:;"
+                        @click="changeNavState('memberActive')"><div></div>MEMBER</a>
 
                 </div>
 
@@ -147,11 +158,11 @@ export default {
         onUpdated(()=>{
             let classVal = navEl.value.getAttribute('class')
             if(classVal){
-                document.querySelector('html').style.overflow="hidden"
-                document.querySelector('body').style.overflow="hidden"
+                document.querySelector('html').classList.add('openMenu')
+                document.querySelector('body').classList.add('openMenu')
             } else{
-                document.querySelector('html').removeAttribute('style')
-                document.querySelector('body').removeAttribute('style')
+                document.querySelector('html').classList.remove('openMenu')
+                document.querySelector('body').classList.remove('openMenu')
             }
         })
 

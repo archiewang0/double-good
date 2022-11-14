@@ -81,4 +81,10 @@ input::-webkit-inner-spin-button {
 
 body,html{
 	overflow-x: hidden;
+
+  &.openMenu{
+    overflow: hidden;     
+    // @media screen and (max-width:980) {
+    // }
+  }
 }

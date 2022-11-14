@@ -16,8 +16,11 @@
             :speed="setSpeed"
             >
 
-            <swiper-slide v-for="slide in slides" :key="slide">
-                <slot :slide="slide"></slot>
+            <swiper-slide 
+                v-for="slide in slides" 
+                :key="slide" 
+                :ref="setRef">
+                <slot :slide="slide" ></slot>
             </swiper-slide>
         </swiper>
     </div>
@@ -31,15 +34,17 @@ import 'swiper/swiper-bundle.min.css';
 
 // SwiperCore.use([Navigation, Pagination, Scrollbar, A11y,Autoplay,FreeMode])
 
-import {computed} from 'vue';
+import {computed , onMounted  } from 'vue';
 
 export default {
-    props: ['values','slides'],
+    props: ['values','slides','getSlideEl'],
     components:{
         Swiper,
         SwiperSlide,
     },
     setup(prop) {
+
+
         const onSwiper = () => {
             // 判斷是否有 onSwiper的prop近來
             let fun = prop.values.createSwiperFun
@@ -102,6 +107,26 @@ export default {
             return mode? mode: false
         })
 
+        // const slideRefs = ref([])
+        let slideRefs = []
+
+        const setRef = (el)=>{
+            if (el && slideRefs.length < prop.slides.length ) {
+                slideRefs.push(el.$el)
+            }
+        }
+
+
+        onMounted(()=>{
+            // prop.slides.forEach(()=> {
+            //     slideRef.value.push(null)
+            // });
+            // console.log('測試')
+            // console.log(slideRefs)
+            prop.getSlideEl(slideRefs)
+
+        })
+
 
         return{
             setView,
@@ -116,6 +141,9 @@ export default {
             onSwiper,
             slideChange,
             modules: [Navigation, Pagination, Scrollbar, A11y,Autoplay,FreeMode],
+        
+            // slideRefs,
+            setRef,
         }
     },
 }

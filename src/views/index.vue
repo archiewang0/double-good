@@ -1,10 +1,11 @@
 <template>
     <div>
-        
+
         <custom-swiper
             :values="passSwiperVal"
             :slides="slides"
             class="banner"
+            :getSlideEl="getSlideEl"
             >
             
             <template #default="{slide}">
@@ -114,10 +115,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import prodAnimate from '../hooks/productsAnimate';
 import prodsMixins from '../hooks/prodsMixins';
 
+// import AniCover from '../components/animation/aniCover.vue';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default {
+    // components: {AniCover},
     setup() {
         const prodBlock = ref(null)
 
@@ -225,19 +229,22 @@ export default {
                 gsap.to(bannerInfo.value,{x:0,opacity:1,duration: .3,delay: .2}),
                 gsap.to(bannerImgs,{scale:1,duration: .5,ease: Power2})
             ])
-            
+        }
 
+        const getSlideEl = (el)=>{
+            bannerImgs = el
+            gsapSet();
+            productFadeIn(prodContainer.value)
+            ScrollTrigger.refresh();
+            // return el
         }
 
 
         onMounted(() => {
-            bannerImgs = document.querySelectorAll('.swiper-slide figure')
-            
-            gsapSet();
-
-            productFadeIn(prodContainer.value)
-
-            ScrollTrigger.refresh();
+            // bannerImgs = document.querySelectorAll('.swiper-slide figure')
+            // gsapSet();
+            // productFadeIn(prodContainer.value)
+            // ScrollTrigger.refresh();
         });
         onUnmounted(() => {
             ScrollTrigger.getAll().forEach((trigger) => {
@@ -261,6 +268,8 @@ export default {
             addCart,
             passSwiperVal,
             srollTo,
+
+            getSlideEl
         }
     },
 }

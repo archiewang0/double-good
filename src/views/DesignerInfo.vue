@@ -10,7 +10,11 @@
 
                     <p class="name">
                         {{designIntro.name}} 
-                        <span v-for="type in designIntro.prodsType" :key="type">#{{type}}</span>
+                        <span 
+                            v-for="type in designIntro.prodsType" 
+                            :key="type"
+                            >#{{type}}
+                        </span>
                     </p>
 
                     <p class="country">{{designIntro.country}}</p>
@@ -89,7 +93,7 @@ export default {
 
         
         onMounted(()=>{
-            document.querySelector('body').style.overflow="unset"
+            // document.querySelector('body').style.overflow="unset"
             // let el = stickyEl.value
             // console.log(el.getBoundingClientRect().top)
             // window.addEventListener('scroll',()=>{

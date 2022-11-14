@@ -44,5 +44,9 @@
     &:focus-within{
         border: 2px solid black;
     }
+
+    @media screen and (max-width: 980px) {
+        display: none;
+    }
 }
 

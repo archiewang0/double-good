@@ -106,4 +106,41 @@
         transform: translate(0,99%);
 
     }
+
+    @media screen and (max-width:980px) {
+        padding-top: 30px;
+        // padding-bottom: unset;
+
+        .mainContent{
+            padding: 0 15px;
+            flex-wrap: wrap;
+            margin-bottom: 23px;
+
+            >.aboutInfo{
+                p{
+                    letter-spacing: 1.5px;
+                    font-size: 13px;
+                    line-height: 1.4;
+                    color: #4d4d4d;
+                }
+                .btns{
+                    div{
+                        >a{
+                            padding: 3px 8px;
+                        }
+                    }
+                }
+            }
+            >*{
+                width: 100%;
+            }
+            >.logo{
+                margin-bottom: 12px;
+                img{
+                    margin: unset;
+                    max-width: 200px;
+                }
+            }
+        }
+    }
 }

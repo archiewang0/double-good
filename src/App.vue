@@ -2,6 +2,9 @@
 		<nav-bar></nav-bar>
 
 		<main>
+			
+			<ani-cover ></ani-cover>
+
 			<router-view v-slot="{ Component }" ref="aniEl">
 				<transition
 					@enter="enter"
@@ -30,8 +33,9 @@
 import { useRoute } from 'vue-router';
 import {useStore} from 'vuex';
 
-import {ref} from 'vue';
+import {ref,onMounted} from 'vue';
 import NavBar from './components/nav/NavBar'
+import AniCover from './components/animation/aniCover.vue';
 
 //套件
 import gsap from 'gsap';
@@ -40,6 +44,7 @@ export default {
 	name: 'App',
 	components: {
 		NavBar,
+		AniCover,
 	},
 
 	setup(){
@@ -47,7 +52,7 @@ export default {
 		const route = useRoute();
 		const store = useStore();
 
-		const aniEl = ref(null)
+		const aniEl = ref(null);
 
 		const enter = (el,done)=>{
 			gsap.from(el,{
@@ -56,6 +61,7 @@ export default {
 				opacity: 0,
 				// ease: 'bounce.out',
 				onComplete: ()=>{
+					// 在 transition 裡面使用ref 會抓取第一個element
 					console.log(aniEl.value.$el)
 					aniEl.value.$el.removeAttribute('style')
 					done()
@@ -83,6 +89,18 @@ export default {
 
 		window.addEventListener('scroll',scrollFunc)
 
+		onMounted(()=>{
+			console.log("route",route)
+
+			if(route.path === '/' ){
+				console.log("route",route)
+
+				window.scrollY !== 0 && (window.scrollY = 0)
+			}
+
+			// console.log("xxx",curRoutePath)
+		})
+		
 
 		return {
 			status,
@@ -90,6 +108,8 @@ export default {
 			enter,
 			afterEnter,
 			// wrapSrollevent,
+
+			route,
 		};
 	}
 }
