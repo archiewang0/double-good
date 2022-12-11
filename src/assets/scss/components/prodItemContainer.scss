@@ -112,4 +112,35 @@
             }
         }
     }
+
+    @media screen and (max-width:980px) {
+        padding: 0 15px;
+        padding-bottom: 50px;
+        .masonry-item{
+            margin: 5px;
+            >a{
+                >.info{
+                    padding-bottom: 8px;
+                    >p{
+                        font-size: 14px;
+                    }
+                    >div{
+                        >span{
+                            font-size: 12px;
+                        }
+                        >h1{
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+
+            .shopBtn{
+                >a{
+                    padding: 10px;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
 }

@@ -121,4 +121,40 @@
             }
         }
     }
+
+    @media screen and (max-width:980px) {
+        width: unset;
+        padding: 0 15px;
+        >.title{
+            font-size: 46px;
+            margin-top: 50px;
+        }
+        >.line{
+            margin: 36px 0;
+        }
+        >.leaveInfo{
+            .title{
+                font-size: 24px;
+            }
+            >.infoForm{
+                width: calc(100% - 40px);
+                padding: 20px;
+                .inputContainer{
+                    >*{
+                        margin-bottom: 25px;
+                        &:last-child{
+                            margin-top: 15px;
+                        }
+                    }
+                }
+                .btns{
+                    padding: 0px;
+                    > button{
+                        padding: 10px;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
 }

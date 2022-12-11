@@ -1,7 +1,6 @@
 <template>
 
     <div class="wrap">
-        <!-- <h1>hollo word - {{pid}}</h1> -->
         <div class="prodItem">
             <figure>
                 <img :src="prodInfo.coverImg" alt="">
@@ -68,10 +67,11 @@
 </template>
 
 <script>
-import {ref , computed} from 'vue';
+import {ref , computed , } from 'vue';
 import {useStore} from 'vuex';
 import storeJs from '../store/index';
 import prodsMixins from '../hooks/prodsMixins'
+// import { useRoute } from 'vue-router';
 
 export default {
     props:['pid'],
@@ -79,14 +79,25 @@ export default {
         const store = useStore();
         // console.log(props.pid)
         const quantityVal = ref(null)
+        // const route = useRoute()
 
         // 這邊改回computed
-        let prodInfo = ref({
-            ...store.getters['prod/products'].find(i=>i.pid == props.pid),
-            buyNum: 1,
+        // let prodInfo = ref({
+        //     ...store.getters['prod/products'].find(i=>i.pid == props.pid),
+        //     buyNum: 1,
+        // })
+        let prodInfo = computed(()=>{
+            return {
+                ...store.getters['prod/products'].find(i=>i.pid == props.pid),
+                buyNum: 1,
+            }
         })
 
-        let designerInfo = store.getters['design/designers'].find(i=>i.did == prodInfo.value.did )
+
+        // let designerInfo = store.getters['design/designers'].find(i=>i.did == prodInfo.value.did )
+        let designerInfo = computed(()=>{
+            return store.getters['design/designers'].find(i=>i.did == prodInfo.value.did )
+        })
 
         function changeQuanVal(state,el){
             if(state === '+' && el.buyNum < 99){
@@ -116,6 +127,8 @@ export default {
         }
     },
     
+    
+
     beforeRouteEnter(to,_,next){
         const pagePid = to.params.pid
         // 無法使用 import {useStore} from 'vuex'

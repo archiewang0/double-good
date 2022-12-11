@@ -8,7 +8,7 @@
         <div class="prodItemsContainer" ref="prodContainer">
             <masonry-wall 
                 :items="products" 
-                :column-width="300"
+                :column-width="isPc? 300: 150"
                 >
 
                 <template #default="slot"  >
@@ -57,7 +57,6 @@ import prodsMixins from '../hooks/prodsMixins'
 import {useStore} from 'vuex';
 import {computed} from 'vue'
 import {useRoute} from 'vue-router';
-
 
 export default {
     components:{
@@ -117,6 +116,8 @@ export default {
             return prods
         })
 
+        const isPc = computed(()=>store.getters['common/isPc'])
+
         // array.sort 無法被computed給偵測
         // const finalProds = computed(()=>products)
         // const {productFadeIn,prodContainer} = prodAnimate()
@@ -133,10 +134,10 @@ export default {
             // finalProds,
             products,
             searchContent,
+            isPc,
 
             addCart,
-
-        }
+        }   
     },
 }
 </script>

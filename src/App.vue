@@ -34,7 +34,7 @@ import { useRoute } from 'vue-router';
 import {useStore} from 'vuex';
 
 import {ref,onMounted} from 'vue';
-import NavBar from './components/nav/NavBar'
+import NavBar from './components/nav/NavBar.vue'
 import AniCover from './components/animation/aniCover.vue';
 
 //套件
@@ -89,16 +89,33 @@ export default {
 
 		window.addEventListener('scroll',scrollFunc)
 
-		onMounted(()=>{
-			console.log("route",route)
 
+		const isPcCheckHandler=(e)=>{
+			// if(e) isPc.value = false
+			// alert('change Media')
+			// console.log(e)
+			if(e.matches) store.commit('common/setIsPcVal',false)
+			// else isPc.value = true
+			else store.commit('common/setIsPcVal',true)
+
+		}
+
+		onMounted(()=>{
 			if(route.path === '/' ){
 				console.log("route",route)
 
 				window.scrollY !== 0 && (window.scrollY = 0)
 			}
 
-			// console.log("xxx",curRoutePath)
+			window.addEventListener("keydown", function(e) {
+				if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+					e.preventDefault();
+				}
+			}, false);
+
+			let mql = window.matchMedia('(max-width: 980px)');
+			mql.addEventListener('change', isPcCheckHandler )
+
 		})
 		
 
@@ -117,25 +134,27 @@ export default {
 
 <style  lang="scss">
 @import './assets/scss/common/_reset';
-/* width */
-::-webkit-scrollbar {
-	width: 10px;
-}
 
-/* Track */
-::-webkit-scrollbar-track {
-	background: #e4e4e4; 
-}
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-	background: rgb(170, 170, 170); 
-}
+	/* width */
+	::-webkit-scrollbar {
+		width: 10px;
+	}
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	background: #0b2659;; 
-}
+	/* Track */
+	::-webkit-scrollbar-track {
+		background: #e4e4e4; 
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: rgb(170, 170, 170); 
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background: #0b2659;; 
+	}
 
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -148,6 +167,7 @@ export default {
 	>main{
 		// padding: 1px;
 		padding-top: 60px;
+		min-height: 70vh;
 	}
 
 	footer{
@@ -178,6 +198,29 @@ export default {
 
 			}
 		}
+	}
+
+
+
+
+	@media screen and (max-width:980px) {
+		>main{
+			padding-top: 40px;
+		}
+		footer{
+			margin-top: 60px;
+			padding: 30px 15px;
+			>div{
+				width: 100%;
+				flex-wrap: wrap;
+				justify-content: center;
+				>p{
+					width: 100%;
+					margin-top: 45px;
+				}
+			}
+		}
+		
 	}
 }
 </style>

@@ -180,6 +180,7 @@
 
     @media screen and (max-width:980px) {
         padding: 0 15px;
+        min-height: 300px;
         // padding-bottom: 100px;
         >div{
             top: -15px;
@@ -233,6 +234,13 @@
                 // animation-iteration-count: infinite;
             }
         }
+
+        .deco{
+            padding-top: 43%;
+            width: 140%;
+            top: 44%;
+            right: -48%;
+        }
     }
 }
 
@@ -263,6 +271,26 @@
 
         }
     }
+
+    @media screen and (max-width:980px) {
+        padding: 0 15px;
+        padding-top: 25%;
+        padding-bottom: 35px;
+        >div{
+            width: 100%;
+            >*{
+                width: 100%;
+            }
+            >.title{
+                font-size: 22px;
+                margin-bottom: 15px;
+
+            }
+            >.paragraph{
+                font-size: 14px;
+            }
+        }
+    }
 }
 
 .loadMoreBlock{
@@ -289,6 +317,17 @@
                 color: white;
             }	
         }
+    }
+
+    @media screen and (max-width:980px) {
+        .loadBtn{
+            >a{
+                padding: 15px 25px;
+                font-size: 22px;
+                -webkit-text-stroke: 0.5px white;
+            }
+        }
+
     }
 }
 

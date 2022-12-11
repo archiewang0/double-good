@@ -11,7 +11,7 @@
                 top: 0;
             }
     
-            &.contextImg{
+            &.contextImg_m{
                 display: none;
             }
     
@@ -70,17 +70,51 @@
 }
 
 
-@media screen and (min-width:980px) {
+@media screen and (max-width:980px) {
     .wrap{
         .about_parallax{
             img{
                 &.contextImg_m{
-                    display: none;
+                    display: block;
+                    z-index: 1;
                 }
                 &.contextImg{
-                    display: block;
+                    display: none;
+                }
+                &.bg{
+                    width: auto;
+                    height: 116vh;
+                    min-height: 900px;
+                    transform: translate(-17%, 0px);
                 }
             }
+
+            .about_content{
+                padding: 0px 15px;
+                transform: translate(0,-70px);
+                .title{
+                    font-size: 36px;
+                    line-height: 1;
+                    margin-bottom: 10px;
+                }
+                img{
+                    width: 100%;
+                    margin-bottom: 30px;
+                }
+                p{
+                    width: 100%;
+                }
+            }
+        }
+
+        .navBtn{
+            >div{
+                >a{
+                    padding: 35px 15px;
+                    font-size: 18px;
+                }
+            }
+
         }
     }
 }

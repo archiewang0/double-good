@@ -3,6 +3,46 @@ nav{
     z-index: 500;
     width: 100%;
 
+    // active 區域
+    &.active{
+        .forMenu{
+            visibility: visible;
+            opacity: 1;
+            >div{
+                transform: translate(0,0);
+
+            }
+        }
+    }
+    &.cartActive{
+        .forCart{
+            visibility: visible;
+            opacity: 1;
+            >div{
+                transform: translate(0,0);
+            }
+        }
+    }
+    &.memberActive{
+        .forMember{
+            visibility: visible;
+            opacity: 1;
+            >div{
+                transform: translate(0,0);
+            }
+        }
+    }
+    &.searchActive{
+        .forSearch{
+            visibility: visible;
+            opacity: 1;
+            >div{
+                transform: translate(0,0);
+            }
+        }
+    }
+
+
     .navWrap{
         width: 100%;
         display: flex;
@@ -21,7 +61,7 @@ nav{
             .menuBtn{
                 width: 30px;
                 height: 40px;
-    
+
                 position: relative;
                 margin-right: 20px;
                 >div{
@@ -40,7 +80,7 @@ nav{
                     top: calc(70% - .5px);
                 }
             }
-    
+
             .logo{
                 height: 100%;
                 position: relative;
@@ -48,7 +88,7 @@ nav{
                 transform: translate(0, 11%);
                 width: calc(100% - 50px);
                 transition: all ease .3s;
-    
+
                 >div{
                     min-width: 300px;
                     img{
@@ -57,7 +97,7 @@ nav{
                     }
                 }
             }
-    
+
             .cart{
                 width: 25px;
                 margin-right: 25px;
@@ -88,12 +128,11 @@ nav{
         }
     }
 
-
     // 共用
     .aside{
-        position: absolute;
+        position: fixed;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         background: rgba($color: black, $alpha: .5);
         top: 0;
         left: 0;
@@ -387,7 +426,7 @@ nav{
                                 transform: scaleX(1.2);
                             }
                         }
-                         .addBtn{
+                        .addBtn{
 
                             &::after{
                                 content: "+";
@@ -583,40 +622,144 @@ nav{
         }
     }
 
+    .forSearch{
+        justify-content: flex-end;
+        >div{
+            display: flex;
+            align-items: flex-start;
+            // align-content: space-between;
+            transform: translate(100%,0);
+            
+            >*{
+                width: 100%;
+            }
+            .top{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid black;
+                flex-grow: 1;
+                >p{
+                    padding-left: 20px;
+                    font-size: 60px;
+                    font-weight: 900;
+                    line-height: .69;
+                    position: relative;
+                    color: black;
+                    >span{
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        font-weight: 100;
+                        transform: translate(calc(100% + 10px),0);
+                        font-size: 16px;
+                        opacity: .8;
+                    }
+                }
 
+                .closeBtn{
+                    display: block;
+                    position: relative;
+                    width: 135px;
+                    height: 135px;
+                    border-left: 1px solid black;
+                    &::after,&::before{
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        width: 80%;
+                        height: 1px;
+                        top: calc(50% - .5px);
+                        left: 10%;
+                        background-color: black;
+                    }
 
+                    &::after{
+                        transform: rotate(45deg);
+                    }
 
-    // active 區域
-    &.active{
-        .forMenu{
-            visibility: visible;
-            opacity: 1;
-            >div{
-                transform: translate(0,0);
+                    &::before{
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
 
+            .inputBlock{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: nowrap;
+                position: relative;
+                top: -50px;
+
+                >div{
+                    width: 50%;
+
+                    label{
+                        display: block;
+                        position: relative;
+                        margin:  20px 0;
+
+                        >span{
+                            position: absolute;
+                            left: 0;
+                            bottom: 10px;
+                            font-size: 14px;
+                            color: gray;
+                            font-size: 18px;
+
+                        }
+                        >input{
+                            width: 100%;
+                            outline: unset;
+                            border: unset;
+                            border-bottom: 1px solid gray;
+                            height: 50px;
+                            font-size: 18px;
+
+                        }
+                        >a{
+                            display: block;
+                            position: absolute;
+                            right: 0;
+                            bottom: 8px;
+                            width: 25px;
+                            height: 15px;
+                            border-radius: 100%;
+                            border: 2px solid black;
+                            &::after{
+                                content: "";
+                                display: block;
+                                width: 50%;
+                                height: 100%;
+                                background-color: black;
+                                position: absolute;
+                                left: calc(50% - 7.5px);
+                                top: calc(50% - 7.5px);
+                                border-radius: 100%;
+                            }
+                        }
+                    }
+
+                    .loginBtn{
+                        width: 100%;
+                        margin-top: 70px;
+                        >a{
+                            display: block;
+                            font-size: 30px;
+                            font-weight: 900;
+                            padding: 25px;
+                            text-align: center;
+                            color: white;
+                            background-color: #00256a;
+                            width: 100%;
+                        }
+                    }
+                }
             }
         }
     }
-    &.cartActive{
-        .forCart{
-            visibility: visible;
-            opacity: 1;
-            >div{
-                transform: translate(0,0);
-            }
-        }
-    }
-    &.memberActive{
-        .forMember{
-            visibility: visible;
-            opacity: 1;
-            >div{
-                transform: translate(0,0);
-            }
-        }
-    }
-
-
 
     @media screen and (max-width:1500px) {
         >div{
@@ -696,6 +839,7 @@ nav{
                 .top{
                     >p{
                         font-size: 36px;
+                        margin-top: 5px;
                     }
                     .closeBtn{
                         width: 50px;
@@ -715,7 +859,143 @@ nav{
                         }
                     }
                 }
+                .list{
+                    height: calc(100% - 190px);
+                    &::-webkit-scrollbar{
+                        width: 3px;
+                    }
+                    .cartItem{
+                        flex-wrap: wrap;
+                        padding-bottom: 10px;
+                        .price{
+                            font-size: 20px;
+                        }
+                        .quantityBox{
+                            input{
+                                width: 37px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .forMember{
+            >div{
+                .inputBlock{
+                    >div{
+                        width: 80%;
+                        .loginBtn{
+                            a{
+                                font-size: 24px;
+                                padding: 15px;
+                            }
+                        }
+                    }
+                }
+                .top{
+                    >p{
+                        font-size: 36px;
+                        padding-top: 5px;
+                    }
+                    .closeBtn{
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
+            }
+        }
+
+        .forSearch{
+            >div{
+                .mainBlock{
+                    
+                    height: calc(100% - 70px);
+                    padding: 15px;
+                    >div{
+                        display: flex ;
+                        flex-wrap: wrap;
+
+                        input[type="text"]{
+                            width: 100%;
+                            font-size: 24px;
+                            border: 1px solid black;
+                            opacity: .6;
+                            transition: all ease .3s;
+                            &:focus{
+                                opacity: 1;
+                                outline: 1px solid black;
+                                // border: 1px solid black;
+                            }
+                        }
+                    
+                        .group{
+                            display: flex;
+                            margin-top: 20px;
+                            width: 100%;
+                            justify-content: space-between;
+                            .selectBar{
+                                display: flex;
+                                .main{
+                                    // border: unset;
+                                    padding: 6px;
+                                    border: 1px solid black;
+                                    .list{
+                                        transform: translate(0,95%);
+                                        >*{
+                                            font-size: 18px;
+                                        }
+                                    }
+                                }
+                            }
+                            input[type="button"]{
+                                background: url(~@/assets/img/search-icon.svg) no-repeat center center;
+                                // transform: translate(0,10%);
+                                // margin-right: 10px;
+                                min-width: 52px;
+                                background-size: 45%;
+                                border: 1px solid;
+                                cursor: pointer;
+                            }
+                        }
+
+                        .recommedBar{
+                            margin-top: 15px;
+                            width: 100%;
+                            padding: 15px;
+                            border: 1px solid #575757;
+                            >p{
+                                color: #616161;
+                                font-size: 16px;
+                                margin-bottom: 10px;
+                                text-align: left;
+                            }
+                            >div{
+                                >a{
+                                    display: block;
+                                    text-align: left;
+                                    font-size: 20px;
+                                    letter-spacing: .5px;
+                                    line-height: 1.5;
+                                }
+                            }
+                        }
+                     
+                    }
+                
+                }
+                .top{
+                    >p{
+                        font-size: 36px;
+                        padding-top: 5px;
+                    }
+                    .closeBtn{
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
             }
         }
     }
+
 }

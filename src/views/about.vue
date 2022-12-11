@@ -5,14 +5,20 @@
             <img 
                 class="contextImg" 
                 src="../assets/img/about-25.svg" 
-                alt=""  
-                ref="contextImgEl"
-                :style="{transform: `translate(0,${curY/1.5}px)`}">
-            <img class="contextImg_m" src="../assets/img/about-25.svg" alt="">
-            <img class="bg" src="../assets/img/586_shop1_202351.jpg">
+                alt=""
+                :style="isPc?{transform: `translate(0,${curY/1.5}px)`}:{}">
+            <img 
+                class="contextImg_m" 
+                src="../assets/img/sm-goodgoods-26.svg" 
+                alt=""
+                ref="contextImg_mEl">
+
+            <img 
+                class="bg" 
+                src="../assets/img/586_shop1_202351.jpg">
 
             <div class="about_content" 
-                :style="{transform: `translate(0,${curY/-5}px)`}">
+                :style="isPc?{transform: `translate(0,${curY/-5}px)`}: {}">
                 <p class="title">ABOUT</p>
                 <img src="../assets/img/about_logo-30.svg" alt="">
                 <p>
@@ -39,11 +45,15 @@
 </template>
 
 <script>
-import { ref, onMounted , onUnmounted} from 'vue';
+import { ref, onMounted , onUnmounted, computed} from 'vue';
+import {useStore} from 'vuex';
 
 export default {
     setup(){
-        const curY = ref(scrollY)
+        const curY = ref(scrollY);
+
+        const store = useStore();
+        const isPc = computed(()=>store.getters['common/isPc'])
 
         const scrollHandler=()=>{
             curY.value = scrollY
@@ -57,7 +67,8 @@ export default {
             window.removeEventListener('scroll',scrollHandler)
         })
         return {
-            curY
+            curY,
+            isPc
         }
     }
 };

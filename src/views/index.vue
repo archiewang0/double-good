@@ -54,7 +54,7 @@
         <div class="prodItemsContainer" ref="prodContainer">
             <masonry-wall 
                 :items="products" 
-                :column-width="300"
+                :column-width="isPc? 300 : 150"
                 >
 
                 <!-- :gap="20" :column-width="300" :ssr-columns="1"   -->
@@ -135,6 +135,8 @@ export default {
         const store = useStore();
 
         const products =  computed(()=>store.getters['prod/products'])
+        const isPc = computed(()=>store.getters['common/isPc'])
+
 
         let titleTl = gsap.timeline();
         // 將動畫寫入 gsapSet 讓他在mounted 的時候寫入
@@ -239,8 +241,21 @@ export default {
             // return el
         }
 
+        // const isPcVal = window.innerWidth>980
+        // const isPc = ref(window.innerWidth>980)
+
+        // const isPcCheckHandler=(e)=>{
+        //     console.log(e)
+        //     if(e) isPc.value = false
+        //     else isPc.value = true
+        // }
 
         onMounted(() => {
+            // let mql = window.matchMedia('(max-width: 980px)');
+
+            // mql.addEventListener('change', isPcCheckHandler )
+
+
             // bannerImgs = document.querySelectorAll('.swiper-slide figure')
             // gsapSet();
             // productFadeIn(prodContainer.value)
@@ -268,8 +283,9 @@ export default {
             addCart,
             passSwiperVal,
             srollTo,
+            isPc,
 
-            getSlideEl
+            getSlideEl,
         }
     },
 }
@@ -277,6 +293,6 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/view/index';
-@import '../assets/scss/components/prodItemContainer';
+@import '../assets/scss/components/prodItemContainer.scss';
 
 </style>

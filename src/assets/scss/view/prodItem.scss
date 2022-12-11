@@ -155,4 +155,27 @@
             }
         }
     }
+
+    @media screen and (max-width:980px) {
+        >.prodItem{
+            flex-wrap: wrap;
+            max-height: unset;
+            >*{
+                width: 100%;
+            }
+            .content{
+                .prodInfo{
+                    .description{
+                        padding-bottom: 20px;
+                        .key{
+                            width: 0px;
+                        }
+                        .val{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

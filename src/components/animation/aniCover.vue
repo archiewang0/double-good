@@ -1,9 +1,13 @@
 <template>
     <div class="aniCover" ref="aniCoverEl">
         <div class="topBlock" ref="topBlockRef">
-            <div class="imgContainer">
-                <img src="../../assets/img/slogan-30.svg" ref="img1">
-                <img src="../../assets/img/slogan-31.svg" ref="img2">
+            <div class="imgContainer" ref="imgContainerEl">
+                <div>
+                    <img src="../../assets/img/slogan-30.svg" ref="img1">
+                </div>
+                <div>
+                    <img src="../../assets/img/slogan-31.svg" ref="img2">
+                </div>
                 <img class="main" src="../../assets/img/slogan.svg" ref="mainImg">
             </div>
         </div>
@@ -29,6 +33,7 @@ export default {
         const aniCoverEl = ref(null)
 
         const bodyEl = ref(null)
+        const imgContainerEl = ref(null)
 
         onMounted(() => {
          
@@ -47,41 +52,45 @@ export default {
             let tl = gsap.timeline();
             tl
             .add(gsap.to(img1.value,{ 
-                transform:' translateX(-50%) rotateX(0deg)', 
+                transform:' rotateX(0deg)', 
                 ease: Back.easeOut(10.7),
                 yoyo: true,
                 repeat: 1,
                 duration: .3,
-                delay:.2
+                delay:.2,
+                onComplete:()=>{
+                    const curImgContainerElHeight = imgContainerEl.value.offsetTop
+                    imgContainerEl.value.style= `position: absolute; top: ${curImgContainerElHeight}px`
+                   
+                }
             }))
             .add(gsap.to(img2.value,{ 
-                transform:' translateX(-50%) rotateX(0deg)', 
+                transform:' rotateX(0deg)', 
                 ease: Back.easeOut(100.7),
                 yoyo: true,
                 repeat: 1,
                 duration: .3,
             }))
             .add(gsap.to(mainImg.value,{ 
-                transform:' translateX(-50%) rotateX(0deg)', 
+                transform:' rotateX(0deg)', 
                 ease: Back.easeOut(100.7),
                 duration: .3,
             }))
-            .add(gsap.to(topBlockRef.value,{height:0,duration:.3,ease:Power2}))
-            .add(gsap.to(btmBlockRef.value,{
-                height:0,
-                duration:.3, 
-                ease:Power2,
-                onComplete:()=>{
-                    
-                    aniCoverEl.value.style="display: none"
-                    bodyEl.value.removeAttribute('style')
-                    // alert('sa')
-                    document.querySelector('html').removeAttribute('style')
-                    
-                }
-            }))
-            
-           
+            .add([
+                gsap.to(topBlockRef.value,{height:0,duration:.3,ease:Power2}),
+                gsap.to(btmBlockRef.value,{
+                    height:0,
+                    duration:.3, 
+                    ease:Power2,
+                    onComplete:()=>{
+                        aniCoverEl.value.style="display: none"
+                        bodyEl.value.removeAttribute('style')
+                        // alert('sa')
+                        document.querySelector('html').removeAttribute('style')
+                        
+                    }
+                })
+            ])
             
         
         });
@@ -99,6 +108,7 @@ export default {
             img2,
             mainImg,
             aniCoverEl,
+            imgContainerEl,
         }
     }
 }

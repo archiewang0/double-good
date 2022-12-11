@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../../assets/scss/components/selectBar';
+<style lang="scss" >
+@import '../../assets/scss/components/selectBar.scss';
 </style>
 

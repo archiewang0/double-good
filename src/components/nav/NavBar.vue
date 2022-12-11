@@ -5,7 +5,7 @@
 
         <div class="navWrap">
             <div>
-                <a class="menuBtn" @click="changeNavState('active')" href="javascript:;" >
+                <a class="menuBtn" @click.left="changeNavState('active')" href="javascript:;" >
                     <div></div>
                     <div></div>
                     <div></div>
@@ -82,6 +82,8 @@
         <!-- for member -->
         <member-aside></member-aside>
 
+        <!-- for searchBlock(m) -->
+        <search-aside></search-aside>
 
         <nav-visual-info></nav-visual-info>
 
@@ -98,16 +100,15 @@ import {useStore} from 'vuex';
 import SearchBar from './SearchBar';
 import MemberAside  from './MemberAside';
 import CartAside from './CartAside';
-import NavVisualInfo from './NavVisualInfo'
-
-
-
+import NavVisualInfo from './NavVisualInfo.vue'
+import SearchAside from './SearchAside.vue';
 
 export default {
     components:{
         SearchBar,
         MemberAside,
         CartAside,
+        SearchAside,
         NavVisualInfo
     },
     setup() {
@@ -141,20 +142,6 @@ export default {
             store.commit('nav/changeNavState',val)
         }
 
-
-        // const setActive = computed(()=>{
-        //     const curLink = route.path.replace('/',"").toUpperCase()
-
-        //     return{
-        //         prod: {'active': curLink === 'PRODUCTS'},
-        //         about: {'active': curLink === 'ABOUT'},
-        //         contact: {'active': curLink === 'CONTACT'},
-        //         designer: {'active': curLink === 'DESIGNER'},
-        //         member: {'active': curLink === 'MEMBER'},
-        //     }
-        // })
-
-
         onUpdated(()=>{
             let classVal = navEl.value.getAttribute('class')
             if(classVal){
@@ -184,6 +171,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../assets/scss/components/navBar';
 </style>

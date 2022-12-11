@@ -111,7 +111,16 @@
         }
     }
 
-
+    @media screen and (max-width:980px) {
+        .designers{
+            padding: 0 15px;
+            >div{
+                width: 100%;
+                margin: unset;
+                margin-bottom: 15px;
+            }
+        }
+    }
 }
 
 

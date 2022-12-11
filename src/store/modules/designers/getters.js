@@ -21,9 +21,6 @@ export default {
 
             i['prodsType'] = prodsType
         })
-        
-        // console.log(designers)
-
 
         return designers
     }

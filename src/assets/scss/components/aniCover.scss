@@ -9,38 +9,59 @@
     flex-direction: column;
     justify-content: space-between;
     z-index: 500;
+
     .topBlock{
-        height: 446px;
+        height: 50%;
         background-color: #fff;
         position: relative;
         overflow: hidden;
 
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+
+        box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.815);
+
         >.imgContainer{
-            position: absolute;
-            top: 320px;
+            position: relative;
             width: 100%;
-            >img{
+            text-align: center;
+            // background-color: red;
+            // transform: translate(-50%, 0);
+
+            >div{
                 position: absolute;
                 height: 100%;
                 left: 50%;
-                transform: translate(-50%,0) rotateX(-90deg);
-                transform-origin: bottom;
-                // opacity: .5;
-                &.main{
-                    position: relative;
-                    width: 100%;
-                    height: auto;
-                    // background-color: red;
-                    // transform: translate(-50%,0) rotateX(0deg);
+                transform: translate(-50%,0);
+                >img{
+                    // position: absolute;
+                    height: 100%;
+                    // left: 50%;
+                    transform: rotateX(-90deg);
+                    transform-origin: bottom;
+                    // opacity: .5;
                 }
+            }
+           
+
+            .main{
+                position: relative;
+                width: 100%;
+                height: auto;
+                transform: rotateX(-90deg);
+                transform-origin: bottom;
             }
         }
        
     }
 
     .bottomBlock{
-        height: calc(100% - 446px);
+        height: 50%;
         background-color: #0b2659;
+
+        box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.815);
+
     }
 
 }

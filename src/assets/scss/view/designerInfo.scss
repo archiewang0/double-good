@@ -5,7 +5,7 @@
     >div{
         max-width: 1500px;
         min-height: 2000px;
-        border: 1px solid red;
+        // border: 1px solid red;
         margin: auto;
         display: flex;
         overflow: visible;
@@ -76,5 +76,28 @@
         }
     }    
 
+    @media screen and (max-width:980px) {
+        padding: 15px;
+        >div{
+            flex-wrap: wrap;
+            min-height: unset;
+            .IntroContainer{
+                width: 100%;
+                flex-wrap: wrap;
+                .main{
+                    padding: unset;
+                    .name{
+                        font-size: 28px;
+                    }
+                }
+            }
+
+            .prodItemsContainer{
+                width: unset;
+                padding: unset;
+                padding-top: 30px;
+            }
+        }
+    }
 }
 

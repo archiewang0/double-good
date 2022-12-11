@@ -59,4 +59,28 @@
             }
         }
     }
+
+    @media screen and(max-width:980px) {
+        padding: 0 15px;
+        padding-bottom: 30px;
+        >div{
+            padding-bottom: 15px;
+            .info{
+                >p{
+                    font-size: 12px;
+                    line-height: 1.2;
+                }
+                &::after{
+                    width: 32px;
+                }
+            }
+            .title{
+                margin-right: 5px;
+                >p{
+                    font-size: 24px;
+                    max-width: 58vw;
+                }
+            }
+        }
+    }
 }

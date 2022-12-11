@@ -30,7 +30,7 @@
             <div class="prodItemsContainer">
                 <masonry-wall
                     :items="designerProds"
-                    :column-width="300">
+                    :column-width="isPc ? 300: 150">
 
                     <template #default="slot">
                         <router-link :to="{name:'prodItem', params:{pid: slot.item.pid}}">
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from '@vue/runtime-core';
+import { computed, onMounted, ref } from '@vue/runtime-core';
 import { useStore } from 'vuex'
 import prodsMixins from '../hooks/prodsMixins'
 
@@ -80,12 +80,17 @@ export default {
     setup(props) {
         const store = useStore();
 
-        const designIntro = store.getters['design/designers'].find((i=>i.did == props.did))
-
+        const designIntro = computed(()=>{
+            return store.getters['design/designers'].find((i=>i.did == props.did))
+        })
+        
+        console.log(designIntro)
         const stickyEl = ref(null)
 
+        const isPc = computed(()=>store.getters['common/isPc'])
+
         // 將 prodsId 變成字串 方便搜尋, 如果依舊array 的話就會使用到雙迴圈
-        let idString = designIntro.prodIds.join(' ').toUpperCase()
+        let idString = designIntro.value.prodIds.join(' ').toUpperCase()
 
         const designerProds = store.getters['prod/products'].filter(i => idString.search(i.pid) !== -1)
 
@@ -109,7 +114,9 @@ export default {
             designIntro,
             designerProds,
             stickyEl,
-            addCart
+            isPc,
+
+            addCart,
         }
     },
 }
